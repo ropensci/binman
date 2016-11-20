@@ -7,10 +7,18 @@
 unzip_dlfiles(dlfiles)
 }
 \arguments{
-\item{dlfiles}{A named list. The names are the relevant platforms.
-The list contain named logical vectors}
+\item{dlfiles}{A data.frame of files by platform and indicating
+whether they were process}
+}
+\value{
+indicates whether the unzips were successful
 }
 \description{
 Unzip downloaded files. Keeps the original zip file
+}
+\examples{
+\dontrun{
+ x<-1
+}
 }
 

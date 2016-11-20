@@ -2,15 +2,19 @@
 #'
 #' Unzip downloaded files. Keeps the original zip file
 #'
-#' @param dlfiles A named list. The names are the relevant platforms.
-#'     The list contain named logical vectors
+#' @param dlfiles A data.frame of files by platform and indicating
+#'     whether they were process
 #'
-#' @return
+#' @return indicates whether the unzips were successful
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'  x<-1
+#' }
 
 unzip_dlfiles <- function(dlfiles){
+  assert_that(is_data.frame(dlfiles))
   if(nrow(dlfiles) == 0L){
     return()
   }
