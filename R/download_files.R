@@ -28,6 +28,8 @@
 #' }
 
 download_files <- function(dllist, overwrite = FALSE){
+  assert_that(is_list_of_df(dllist))
+  assert_that(is_logical(overwrite))
   dl_files <- function(dir, file, url){
     if(!dir.exists(dir)){
       message("Creating directory: ", dir, "\n")

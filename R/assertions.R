@@ -15,7 +15,7 @@ assertthat::on_failure(is_list) <- function(call, env){
 }
 
 is_list_of_df <- function(x){
-  is.list(x) && all(vapply(x, is.data.frame, logical(1)))
+  is_list(x) && all(vapply(x, is.data.frame, logical(1)))
 }
 
 assertthat::on_failure(is_list_of_df) <- function(call, env){
@@ -65,4 +65,20 @@ is_character <- function(x){
 
 assertthat::on_failure(is_character) <- function(call, env) {
   paste0(deparse(call$x), " should be an character vector.")
+}
+
+is_logical <- function(x){
+  is.logical(x)
+}
+
+assertthat::on_failure(is_logical) <- function(call, env) {
+  paste0(deparse(call$x), " should be an logical vector.")
+}
+
+is_data.frame <- function(x){
+  is.data.frame(x)
+}
+
+assertthat::on_failure(is_data.frame) <- function(call, env) {
+  paste0(deparse(call$x), " should be a data.frame.")
 }
