@@ -35,6 +35,13 @@ predl_google_storage <-
            fileregex = "\\.zip$",
            platformregex = platform,
            versionregex = paste0("(.*)/.*", fileregex)){
+    assert_that(is_URL_file(url))
+    assert_that(is.character(platform))
+    assert_that(is_integer(history))
+    assert_that(is_string(appname))
+    assert_that(is.string(fileregex))
+    assert_that(is.character(platformregex))
+    assert_that(is.character(versionregex))
     ver_data <- jsonlite::fromJSON(url)[["items"]]
     ver_data <- ver_data[ order(as.numeric(ver_data[["generation"]])), ]
     is_file <- grepl(fileregex, basename(ver_data[["name"]]))
@@ -43,7 +50,7 @@ predl_google_storage <-
     })
     app_links <- lapply(is_platform, function(x){
       df <- utils::tail(ver_data[is_file & x, ], history)
-      df[["version"]] <- gsub("(.*)/chromedriver.*", "\\1", df[["name"]])
+      df[["version"]] <- gsub(versionregex, "\\1", df[["name"]])
       df[["url"]] <- df[["mediaLink"]]
       df[["file"]] <- vapply(df[["url"]], function(x){
         basename(xml2::url_unescape(httr::parse_url(x)[["path"]]))
