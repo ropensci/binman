@@ -19,6 +19,8 @@
 #' }
 
 assign_directory <- function(dllist, appname){
+  assert_that(is_list_of_df(dllist))
+  assert_that(is_string(appname))
   dl_dirs <- function(platform, version){
     dlversion <- normalizePath(paste(platform, version, sep = "/"),
                                mustWork = FALSE)
@@ -33,5 +35,5 @@ assign_directory <- function(dllist, appname){
       file.exists(file.path(platformDF[["dir"]], platformDF[["file"]]))
     platformDF
   })
-  setNames(applist, names(dllist))
+  invisible(setNames(applist, names(dllist)))
 }
