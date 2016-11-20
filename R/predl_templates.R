@@ -35,7 +35,7 @@ predl_google_storage <-
            fileregex = "\\.zip$",
            platformregex = platform,
            versionregex = paste0("(.*)/.*", fileregex)){
-    ver_data <- fromJSON(url)[["items"]]
+    ver_data <- jsonlite::fromJSON(url)[["items"]]
     ver_data <- ver_data[ order(as.numeric(ver_data[["generation"]])), ]
     is_file <- grepl(fileregex, basename(ver_data[["name"]]))
     is_platform <- lapply(platformregex, function(x){

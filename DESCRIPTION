@@ -14,5 +14,6 @@ Suggests:
 Imports:
     rappdirs,
     yaml,
-    httr
+    httr,
+    jsonlite
 RoxygenNote: 5.0.1
