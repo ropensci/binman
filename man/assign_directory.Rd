@@ -11,7 +11,7 @@ assign_directory(dllist, appname)
 platform. The data.frame should contain the version, url and file
 to be processed.}
 
-\item{appname}{}
+\item{appname}{Name to give the app}
 }
 \value{
 A named list of data.frames. The data.frame should contain the

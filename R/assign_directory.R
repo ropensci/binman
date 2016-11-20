@@ -4,7 +4,7 @@
 #' @param dllist A named list of data.frames. The name indicates the
 #'     platform. The data.frame should contain the version, url and file
 #'     to be processed.
-#' @param appname
+#' @param appname Name to give the app
 #'
 #' @return A named list of data.frames. The data.frame should contain the
 #'     version, url and file to be processed, the directory to download
