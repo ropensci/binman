@@ -51,7 +51,7 @@ assertthat::on_failure(is_URL_file) <- function(call, env) {
   paste0(deparse(call$x), " is not a URL or file")
 }
 
-is_integer() <- function(x){
+is_integer <- function(x){
   is.integer(x)
 }
 
@@ -59,7 +59,7 @@ assertthat::on_failure(is_integer) <- function(call, env) {
   paste0(deparse(call$x), " should be an integer value.")
 }
 
-is_character() <- function(x){
+is_character <- function(x){
   is.character(x)
 }
 
