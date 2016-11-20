@@ -7,7 +7,7 @@
 #'     download the file to and whether the file already exists.
 #' @param overwrite Overwrite existing binaries. Default value of FALSE
 #'
-#' @return A list of logical vectors indicating whether a file was
+#' @return A data.frame indicating whether a file was
 #'     downloaded for a platform.
 #' @export
 #'
@@ -40,18 +40,25 @@ download_files <- function(dllist, overwrite = FALSE){
     httr::stop_for_status(res)
     res
   }
-  lapply(dllist, function(platformDF){
+  dlfiles <- lapply(names(dllist), function(platform){
+    platformDF <-dllist[[platform]]
     if(!overwrite){
       platformDF <- platformDF[!platformDF[["exists"]], ]
     }
     if(identical(nrow(platformDF), 0L)){
-      return(NULL)
+      return(data.frame(platform = character(), file = character(),
+                        processed = logical()))
     }
     res <- Map(dl_files,
                dir = platformDF[["dir"]],
                file = platformDF[["file"]],
                url = platformDF[["url"]], USE.NAMES = FALSE)
     res <- vapply(res, class, character(1)) == "response"
-    setNames(res, file.path(platformDF[["dir"]], platformDF[["file"]]))
+    data.frame(platform = platform,
+               file = file.path(platformDF[["dir"]],
+                                platformDF[["file"]]),
+               processed = res,
+               stringsAsFactors = FALSE)
   })
+  invisible(do.call(rbind.data.frame, dlfiles))
 }

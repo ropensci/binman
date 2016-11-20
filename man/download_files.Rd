@@ -14,7 +14,7 @@ download the file to and whether the file already exists.}
 \item{overwrite}{Overwrite existing binaries. Default value of FALSE}
 }
 \value{
-A list of logical vectors indicating whether a file was
+A data.frame indicating whether a file was
     downloaded for a platform.
 }
 \description{
