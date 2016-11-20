@@ -1,0 +1,11 @@
+name: chromedriver
+procfunction:
+  proc_chrome_driver:
+    url: https://www.googleapis.com/storage/v1/b/chromedriver/o
+    platform:
+    - linux64
+    - win32
+    - mac64
+    history: 5
+dlfunction:
+  dl_chrome_driver: []
