@@ -18,5 +18,6 @@ Imports:
     jsonlite,
     xml2,
     utils,
-    stats
+    stats,
+    assertthat
 RoxygenNote: 5.0.1
