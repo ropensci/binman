@@ -12,5 +12,5 @@ test_that("canPreDowloadGoogleStorage", {
                      .Dim = c(5L, 3L),
                      .Dimnames = list(NULL,
                                       c("linux64", "win32", "mac64")))
-  expect_identical(vapply(dllist, names, character(5)), exout)
+  expect_identical(vapply(gsdllist, names, character(5)), exout)
 })
