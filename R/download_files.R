@@ -7,8 +7,8 @@
 #'     download the file to and whether the file already exists.
 #' @param overwrite Overwrite existing binaries. Default value of FALSE
 #'
-#' @return A list of download responses for each of the proposed files.
-#'     If no download was carried out the response is NULL.
+#' @return A list of logical vectors indicating whether a file was
+#'     downloaded for a platform.
 #' @export
 #'
 #' @examples
@@ -51,6 +51,7 @@ download_files <- function(dllist, overwrite = FALSE){
                dir = platformDF[["dir"]],
                file = platformDF[["file"]],
                url = platformDF[["url"]], USE.NAMES = FALSE)
-    res
+    res <- vapply(res, class, character(1)) == "response"
+    setNames(res, file.path(platformDF[["dir"]], platformDF[["file"]]))
   })
 }

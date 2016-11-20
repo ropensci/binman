@@ -14,8 +14,8 @@ download the file to and whether the file already exists.}
 \item{overwrite}{Overwrite existing binaries. Default value of FALSE}
 }
 \value{
-A list of download responses for each of the proposed files.
-    If no download was carried out the response is NULL.
+A list of logical vectors indicating whether a file was
+    downloaded for a platform.
 }
 \description{
 Download binaries from repository

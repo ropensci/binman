@@ -13,6 +13,6 @@ test_that("canDownloadFiles", {
     `base::dir.create` = function(...){TRUE},
     dlfiles <- download_files(dllist)
   )
-  test_res <- function(x)any(vapply(x, class, character(1)) != "response")
-  expect_false(any(vapply(dlfiles, test_res, logical(1))))
+  test_res <- function(x)vapply(x, all, logical(1))
+  expect_true(all(test_res(dlfiles)))
 })

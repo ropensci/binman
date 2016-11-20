@@ -1,6 +1,6 @@
 name: chromedriver
-procfunction:
-  proc_chrome_driver:
+predlfunction:
+  predl_chrome_driver:
     url: https://www.googleapis.com/storage/v1/b/chromedriver/o
     platform:
     - linux64
@@ -8,4 +8,6 @@ procfunction:
     - mac64
     history: 5
 dlfunction:
-  dl_chrome_driver: []
+  "binman::download_files"
+postdlfunction:
+
