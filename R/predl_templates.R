@@ -36,12 +36,12 @@ predl_google_storage <-
            platformregex = platform,
            versionregex = paste0("(.*)/.*", fileregex)){
     assert_that(is_URL_file(url))
-    assert_that(is.character(platform))
+    assert_that(is_character(platform))
     assert_that(is_integer(history))
     assert_that(is_string(appname))
-    assert_that(is.string(fileregex))
-    assert_that(is.character(platformregex))
-    assert_that(is.character(versionregex))
+    assert_that(is_string(fileregex))
+    assert_that(is_character(platformregex))
+    assert_that(is_character(versionregex))
     ver_data <- jsonlite::fromJSON(url)[["items"]]
     ver_data <- ver_data[ order(as.numeric(ver_data[["generation"]])), ]
     is_file <- grepl(fileregex, basename(ver_data[["name"]]))

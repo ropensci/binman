@@ -15,7 +15,7 @@ assertthat::on_failure(is_list) <- function(call, env){
 }
 
 is_list_of_df <- function(x){
-  is.list(x) && all(vapply(test_dllist, is.data.frame, logical(1)))
+  is.list(x) && all(vapply(x, is.data.frame, logical(1)))
 }
 
 assertthat::on_failure(is_list_of_df) <- function(call, env){
