@@ -1,4 +1,4 @@
 library(testthat)
-library(binarymanager)
+library(binman)
 
-test_check("binarymanager")
+test_check("binman")
