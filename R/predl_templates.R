@@ -42,7 +42,7 @@ predl_google_storage <-
       grepl(x, basename(ver_data[["name"]]))
     })
     app_links <- lapply(is_platform, function(x){
-      df <- tail(ver_data[is_file & x, ], history)
+      df <- utils::tail(ver_data[is_file & x, ], history)
       df[["version"]] <- gsub("(.*)/chromedriver.*", "\\1", df[["name"]])
       df[["url"]] <- df[["mediaLink"]]
       df[["file"]] <- vapply(df[["url"]], function(x){

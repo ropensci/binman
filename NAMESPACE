@@ -3,3 +3,4 @@
 export(assign_directory)
 export(download_files)
 export(predl_google_storage)
+importFrom(stats,setNames)

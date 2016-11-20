@@ -15,5 +15,8 @@ Imports:
     rappdirs,
     yaml,
     httr,
-    jsonlite
+    jsonlite,
+    xml2,
+    utils,
+    stats
 RoxygenNote: 5.0.1
