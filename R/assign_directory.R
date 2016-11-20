@@ -13,7 +13,9 @@
 #'
 #' @examples
 #' \dontrun{
-#'   x <- 1
+#' tdata <- system.file("testdata", "test_dllist.Rdata", package="binman")
+#' load(tdata)
+#' assign_directory(test_dllist, "myapp")
 #' }
 
 assign_directory <- function(dllist, appname){

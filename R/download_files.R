@@ -6,10 +6,25 @@
 #'     contain the version, url and file to be processed, the directory to
 #'     download the file to and whether the file already exists.
 #'
-#' @return
+#' @return A list of download responses for each of the proposed files.
+#'     If no download was carried out the response is NULL.
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' trdata <- system.file("testdata", "test_dlres.Rdata", package="binman")
+#' tldata <- system.file("testdata", "test_dllist.Rdata", package="binman")
+#' load(trdata)
+#' load(tldata)
+#' dllist <- assign_directory(test_dllist, "myapp")
+#' testthat::with_mock(
+#'   `httr::GET` = function(...){
+#'     test_llres
+#'   },
+#'   `base::dir.create` = function(...){TRUE},
+#'   dlfiles <- download_files(dllist)
+#' )
+#' }
 
 download_files <- function(dllist, overwrite = FALSE){
   dl_files <- function(dir, file, url){
@@ -34,6 +49,7 @@ download_files <- function(dllist, overwrite = FALSE){
     res <- Map(dl_files,
                dir = platformDF[["dir"]],
                file = platformDF[["file"]],
-               url = platformDF[["url"]])
+               url = platformDF[["url"]], USE.NAMES = FALSE)
+    res
   })
 }
