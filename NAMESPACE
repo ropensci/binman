@@ -3,4 +3,6 @@
 export(assign_directory)
 export(download_files)
 export(predl_google_storage)
+export(unzip_dlfiles)
+importFrom(assertthat,assert_that)
 importFrom(stats,setNames)
