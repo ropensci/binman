@@ -5,6 +5,7 @@
 #' @param dllist A named list of data.frames. The data.frame should
 #'     contain the version, url and file to be processed, the directory to
 #'     download the file to and whether the file already exists.
+#' @param overwrite Overwrite existing binaries. Default value of FALSE
 #'
 #' @return A list of download responses for each of the proposed files.
 #'     If no download was carried out the response is NULL.

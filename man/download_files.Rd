@@ -10,6 +10,8 @@ download_files(dllist, overwrite = FALSE)
 \item{dllist}{A named list of data.frames. The data.frame should
 contain the version, url and file to be processed, the directory to
 download the file to and whether the file already exists.}
+
+\item{overwrite}{Overwrite existing binaries. Default value of FALSE}
 }
 \value{
 A list of download responses for each of the proposed files.
