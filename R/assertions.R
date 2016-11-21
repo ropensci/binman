@@ -82,3 +82,16 @@ is_data.frame <- function(x){
 assertthat::on_failure(is_data.frame) <- function(call, env) {
   paste0(deparse(call$x), " should be a data.frame.")
 }
+
+contains_required <- function(x, required){
+  is.list(x) && (required %in% names(x))
+}
+
+assertthat::on_failure(contains_required) <- function(call, env) {
+  required <- eval(call$required, env)
+  paste0(deparse(call$x),
+         " does not have one of ",
+         paste(required, collapse = ","),
+         " as required by specification."
+  )
+}
