@@ -31,7 +31,11 @@ Pre download Github assets template function
 }
 \examples{
 \dontrun{
-x <- 1
+gadata <- system.file("testdata", "test_gitassets.json",
+                      package="binman")
+platform <- c("linux64", "win64", "macos")
+gadllist <- predl_github_assets(url = gadata, platform, history = 3L,
+                                appname = "binman_chromedriver")
 }
 }
 

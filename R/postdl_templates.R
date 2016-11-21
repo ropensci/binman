@@ -33,7 +33,7 @@ unzip_dlfiles <- function(dlfiles){
   unzip_file <- function(platform, file, processed){
     if(!processed){return()}
     exdir <- dirname(file)
-    unzip(file, exdir = exdir)
+    utils::unzip(file, exdir = exdir)
   }
   Map(unzip_file,
       platform = dlfiles[["platform"]],
