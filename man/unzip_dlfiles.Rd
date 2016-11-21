@@ -11,14 +11,26 @@ unzip_dlfiles(dlfiles)
 whether they were process}
 }
 \value{
-indicates whether the unzips were successful
+Returns a list of character vectors indicating files
+    processed
 }
 \description{
 Unzip downloaded files. Keeps the original zip file
 }
 \examples{
 \dontrun{
- x<-1
+ymlfile <- system.file("exdata", "sampleapp.yml", package="binman")
+trdata <- system.file("testdata", "test_dlres.Rdata", package="binman")
+load(trdata)
+testthat::with_mock(
+  `httr::GET` = function(...){
+    test_llres
+  },
+  `base::dir.create` = function(...){TRUE},
+  `utils::unzip` = function(zipfile, ...){zipfile},
+  procyml <- process_yaml(ymlfile)
+)
+procyml
 }
 }
 

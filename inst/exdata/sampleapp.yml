@@ -3,12 +3,10 @@ predlfunction:
   "binman::predl_google_storage":
     url: https://www.googleapis.com/storage/v1/b/chromedriver/o
     platform:
-    - linux64
-    - win32
     - mac64
     history: 5
     appname: "binman_chromedriver"
 dlfunction:
-  "binman::download_files"
+  "binman::download_files": []
 postdlfunction:
-  "binman::unzip_dlfiles"
+  "binman::unzip_dlfiles": []
