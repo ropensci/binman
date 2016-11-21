@@ -6,10 +6,24 @@
 #' @param ymlfile A file in a YAML format defining the pre-download/
 #'     download and post download functions together with their arguments.
 #'
-#' @return
+#' @return A list of files processed (downloaded and post processed)
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' ymlfile <- system.file("exdata", "sampleapp.yml", package="binman")
+#' trdata <- system.file("testdata", "test_dlres.Rdata", package="binman")
+#' load(trdata)
+#' testthat::with_mock(
+#'   `httr::GET` = function(...){
+#'     test_llres
+#'   },
+#'   `base::dir.create` = function(...){TRUE},
+#'   `utils::unzip` = function(zipfile, ...){zipfile},
+#'   procyml <- process_yaml(ymlfile)
+#' )
+#' procyml
+#' }
 
 process_yaml <- function(ymlfile){
   ymldata <- yaml::yaml.load_file(ymlfile)
