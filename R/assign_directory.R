@@ -22,8 +22,7 @@ assign_directory <- function(dllist, appname){
   assert_that(is_list_of_df(dllist))
   assert_that(is_string(appname))
   dl_dirs <- function(platform, version){
-    dlversion <- normalizePath(paste(platform, version, sep = "/"),
-                               mustWork = FALSE)
+    dlversion <- file.path(platform, version)
     dldir <- rappdirs::user_data_dir(appname, "binman", dlversion)
   }
   applist <- lapply(names(dllist), function(platform){
