@@ -59,3 +59,64 @@ predl_google_storage <-
     })
     assign_directory(setNames(app_links, platform), appname)
   }
+
+#' Pre download Github assets
+#'
+#' Pre download Github assets template function
+#'
+#' @param url A url giving the github asset JSON for a project. As an
+#'     example https://github.com/mozilla/geckodriver/releases the
+#'     geckodriver project has an asset JSON available at
+#'     https://api.github.com/repos/mozilla/geckodriver/releases
+#' @param platform A character vector of platform names
+#' @param history The maximum number of files to get for a platform
+#' @param appname Name of the app
+#' @param platformregex A filter for platforms. Defaults to the platform
+#'
+#' @return A named list of data.frames. The name indicates the
+#'     platform. The data.frame should contain the version, url and file
+#'     to be processed. Used as input for \code{\link{download_files}} or
+#'     an equivalent.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' x <- 1
+#' }
+
+predl_github_assets <-
+  function(url, platform, history, appname, platformregex = platform){
+    assert_that(is_URL_file(url))
+    assert_that(is_character(platform))
+    assert_that(is_integer(history))
+    assert_that(is_string(appname))
+    assert_that(is_character(platformregex))
+    ghdata <- jsonlite::fromJSON(url)
+    version <- ghdata[["tag_name"]]
+    get_args <- function(version, assets){
+      file <- assets[["name"]]
+      url <- assets[["browser_download_url"]]
+      platind <- vapply(platformregex, grepl, logical(length(file)), file)
+      plat <- if(is.null(dim(platind))){
+        if(sum(platind) > 1){
+          stop("File matches more than one platform. Check regex.")
+        }
+        ifelse(length(platform[platind]) > 0, platform[platind], NA)
+      }else{
+        if(any(rowSums(platind) > 1)){
+          stop("File matches more than one platform. Check regex.")
+        }
+        apply(platind, 1, function(x){
+          ifelse(length(platform[x]) > 0, platform[x], NA)
+        })
+      }
+      res <- data.frame(file = file, url = url, version = version,
+                        platform = plat, stringsAsFactors = FALSE)
+      na.omit(res)
+    }
+    res <- Map(get_args, version = version, assets = ghdata[["assets"]])
+    res <- do.call(rbind.data.frame, c(res, make.row.names = FALSE))
+    res <- split(res[, c("version", "url", "file")], f = res[["platform"]])
+    res <- lapply(res, utils::head, history)
+    assign_directory(res, appname)
+  }

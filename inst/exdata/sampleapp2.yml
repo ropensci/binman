@@ -1,0 +1,14 @@
+name: binman-geckodriver
+predlfunction:
+  "binman::predl_github_assets":
+    url: https://api.github.com/repos/mozilla/geckodriver/releases
+    platform:
+    - linux64
+    - mac64
+    - win64
+    history: 3
+    appname: "binman_geckodriver"
+dlfunction:
+  "binman::download_files": []
+postdlfunction:
+  "binman::unzip_dlfiles": []
