@@ -1,3 +1,8 @@
+# binman 0.0.2
+
+* Added github assets pre download template.
+* Added bitbucket downloads pre download template.
+
 # binman 0.0.1
 
 * Added download_files, assign_directory functions.
