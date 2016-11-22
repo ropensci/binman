@@ -34,7 +34,7 @@ predl_google_storage <-
   function(url, platform, history, appname,
            fileregex = "\\.zip$",
            platformregex = platform,
-           versionregex = paste0("(.*)/.*", fileregex)){
+           versionregex = c(paste0("(.*)/.*", fileregex), "\\1")){
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
@@ -50,7 +50,8 @@ predl_google_storage <-
     })
     app_links <- lapply(is_platform, function(x){
       df <- utils::tail(ver_data[is_file & x, ], history)
-      df[["version"]] <- gsub(versionregex, "\\1", df[["name"]])
+      df[["version"]] <- gsub(versionregex[1], versionregex[2],
+                              df[["name"]])
       df[["url"]] <- df[["mediaLink"]]
       df[["file"]] <- vapply(df[["url"]], function(x){
         basename(xml2::url_unescape(httr::parse_url(x)[["path"]]))
@@ -147,7 +148,8 @@ predl_github_assets <-
 predl_bitbucket_downloads <-
   function(url, platform, history, appname,
            platformregex = platform,
-           versionregex = ".*(\\d+\\.)?(\\d+\\.)?(*|\\d+).*"){
+           versionregex = c(".*(\\d+\\.)?(\\d+\\.)?(*|\\d+).*",
+                            "\\1\\2\\3")){
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
@@ -157,7 +159,7 @@ predl_bitbucket_downloads <-
     bbdata <- jsonlite::fromJSON(url)
     file <- bbdata[["values"]][["name"]]
     url <- bbdata[["values"]][["links"]][["self"]][["href"]]
-    version <- gsub(versionregex, "\\1\\2\\3", file)
+    version <- gsub(versionregex[1], versionregex[2], file)
     plat <- match_platform(file, platform, platformregex)
     res <- data.frame(file = file, url = url, version = version,
                       platform = plat, stringsAsFactors = FALSE)
