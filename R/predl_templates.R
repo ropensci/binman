@@ -124,6 +124,7 @@ predl_github_assets <-
 #' @param history The maximum number of files to get for a platform
 #' @param appname Name of the app
 #' @param platformregex A filter for platforms. Defaults to the platform
+#' @param versionregex A regex for retrieving the version.
 #'
 #' @return A named list of data.frames. The name indicates the
 #'     platform. The data.frame should contain the version, url and file
@@ -143,23 +144,25 @@ predl_github_assets <-
 #'                             platformregex)
 #' }
 
-predl_bitbucket_downloads <- function(url, platform, history, appname,
-                                      platformregex = platform){
-  assert_that(is_URL_file(url))
-  assert_that(is_character(platform))
-  assert_that(is_integer(history))
-  assert_that(is_string(appname))
-  assert_that(is_character(platformregex))
-  bbdata <- jsonlite::fromJSON(url)
-  file <- bbdata[["values"]][["name"]]
-  url <- bbdata[["values"]][["links"]][["self"]][["href"]]
-  version <-
-    gsub("phantomjs-(\\d+\\.)?(\\d+\\.)?(*|\\d+).*", "\\1\\2\\3", file)
-  plat <- match_platform(file, platform, platformregex)
-  res <- data.frame(file = file, url = url, version = version,
-                    platform = plat, stringsAsFactors = FALSE)
-  res <- stats::na.omit(res)
-  res <- split(res[, c("version", "url", "file")], f = res[["platform"]])
-  res <- lapply(res, utils::head, history)
-  assign_directory(res, appname)
-}
+predl_bitbucket_downloads <-
+  function(url, platform, history, appname,
+           platformregex = platform,
+           versionregex = ".*(\\d+\\.)?(\\d+\\.)?(*|\\d+).*"){
+    assert_that(is_URL_file(url))
+    assert_that(is_character(platform))
+    assert_that(is_integer(history))
+    assert_that(is_string(appname))
+    assert_that(is_character(platformregex))
+    assert_that(is_character(versionregex))
+    bbdata <- jsonlite::fromJSON(url)
+    file <- bbdata[["values"]][["name"]]
+    url <- bbdata[["values"]][["links"]][["self"]][["href"]]
+    version <- gsub(versionregex, "\\1\\2\\3", file)
+    plat <- match_platform(file, platform, platformregex)
+    res <- data.frame(file = file, url = url, version = version,
+                      platform = plat, stringsAsFactors = FALSE)
+    res <- stats::na.omit(res)
+    res <- split(res[, c("version", "url", "file")], f = res[["platform"]])
+    res <- lapply(res, utils::head, history)
+    assign_directory(res, appname)
+  }

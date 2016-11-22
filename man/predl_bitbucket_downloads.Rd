@@ -5,7 +5,8 @@
 \title{Pre download bitbucket downloads}
 \usage{
 predl_bitbucket_downloads(url, platform, history, appname,
-  platformregex = platform)
+  platformregex = platform,
+  versionregex = ".*(\\\\d+\\\\.)?(\\\\d+\\\\.)?(*|\\\\d+).*")
 }
 \arguments{
 \item{url}{A url giving the bitbucket download JSON for a project. As
@@ -20,6 +21,8 @@ https://api.bitbucket.org/2.0/repositories/ariya/phantomjs/downloads?pagelen=100
 \item{appname}{Name of the app}
 
 \item{platformregex}{A filter for platforms. Defaults to the platform}
+
+\item{versionregex}{A regex for retrieving the version.}
 }
 \value{
 A named list of data.frames. The name indicates the
