@@ -32,6 +32,6 @@ test_that("canReturnEmptyDFWhenEmptyDownloadFiles", {
     dlfiles <- download_files(dllist)
   )
   exout <- data.frame(platform = character(), file = character(),
-                      processed = logical())
+                      processed = logical(), stringsAsFactors = FALSE)
   expect_identical(dlfiles, exout)
 })
