@@ -6,3 +6,21 @@ pretty_message <- function(x, ..., width = getOption("width")){
   }
   message(newx, ...)
 }
+
+match_platform <- function(file, platform, platformregex){
+  platind <- vapply(platformregex, grepl, logical(length(file)), file)
+  plat <- if(is.null(dim(platind))){
+    if(sum(platind) > 1){
+      stop("File matches more than one platform. Check regex.")
+    }
+    ifelse(length(platform[platind]) > 0, platform[platind], NA)
+  }else{
+    if(any(rowSums(platind) > 1)){
+      stop("File matches more than one platform. Check regex.")
+    }
+    apply(platind, 1, function(x){
+      ifelse(length(platform[x]) > 0, platform[x], NA)
+    })
+  }
+  invisible(plat)
+}
