@@ -1,21 +1,20 @@
-# binarymanager
+binman
+==========================
+| CRAN version       | Travis build status   | Coverage |
+| :-------------: |:-------------:|:-------------:|
+|  | [![Build Status](https://travis-ci.org/johndharrison/binman.svg?branch=master)](https://travis-ci.org/johndharrison/binman) | [![codecov](https://codecov.io/gh/johndharrison/binman/branch/master/graph/badge.svg)](https://codecov.io/gh/johndharrison/binman)|
 
-The goal of binarymanager is to ...
+Tools and functions for managing the download of binary files.
+Binary repositories are defined in YAML format. Defining new 
+pre-download, download and post-download templates allow additonal 
+repositories to be added.
 
 ## Installation
 
-You can install binarymanager from github with:
+You can install binman from github with:
 
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("johndharrison/binarymanager")
-```
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-## basic example code
+devtools::install_github("johndharrison/binman")
 ```
