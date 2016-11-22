@@ -5,7 +5,8 @@
 \title{Pre-Download Google Storage}
 \usage{
 predl_google_storage(url, platform, history, appname, fileregex = "\\\\.zip$",
-  platformregex = platform, versionregex = paste0("(.*)/.*", fileregex))
+  platformregex = platform, versionregex = c(paste0("(.*)/.*", fileregex),
+  "\\\\1"))
 }
 \arguments{
 \item{url}{A url giving the JSON bucket listings for a project. For

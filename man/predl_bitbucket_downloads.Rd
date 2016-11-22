@@ -6,7 +6,8 @@
 \usage{
 predl_bitbucket_downloads(url, platform, history, appname,
   platformregex = platform,
-  versionregex = ".*(\\\\d+\\\\.)?(\\\\d+\\\\.)?(*|\\\\d+).*")
+  versionregex = c(".*(\\\\d+\\\\.)?(\\\\d+\\\\.)?(*|\\\\d+).*",
+  "\\\\1\\\\2\\\\3"))
 }
 \arguments{
 \item{url}{A url giving the bitbucket download JSON for a project. As
