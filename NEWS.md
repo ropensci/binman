@@ -1,3 +1,7 @@
+# binman 0.0.3
+
+* Added Apveyor CI for windows
+
 # binman 0.0.2
 
 * Added github assets pre download template.
