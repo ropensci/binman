@@ -29,3 +29,21 @@ test_that("canPreDowloadGithubAssets", {
                                       c("linux64", "macos", "win64")))
   expect_identical(vapply(gadllist, names, character(5)), exout)
 })
+
+test_that("canPreDownloadBitBucketDownloads", {
+  bbdata <- system.file("testdata", "test_bitbucketdl.json",
+                        package="binman")
+  platform <- c("linux64", "windows", "macosx")
+  platformregex <- c("linux-x86_64", "windows", "macosx")
+  bbdllist <-
+    predl_bitbucket_downloads(url = bbdata, platform, history = 3L,
+                              appname = "binman_chromedriver",
+                              platformregex)
+  exout <- structure(c("version", "url", "file", "dir", "exists",
+                       "version", "url", "file", "dir", "exists",
+                       "version", "url", "file", "dir", "exists"),
+                     .Dim = c(5L, 3L),
+                     .Dimnames = list(NULL, c("linux64", "macosx",
+                                              "windows")))
+  expect_identical(vapply(bbdllist, names, character(5)), exout)
+})

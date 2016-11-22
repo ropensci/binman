@@ -4,10 +4,16 @@ predlfunction:
     url: https://api.bitbucket.org/2.0/repositories/ariya/phantomjs/downloads?pagelen=100
     platform:
     - linux64
-    - mac64
-    - win64
+    - linux32
+    - windows
+    - macosx
     history: 3
     appname: "binman_phantomjs"
+    platformregex:
+    - "linux-x86_64"
+    - "linux-i686"
+    - "windows"
+    - "macosx"
 dlfunction:
   "binman::download_files": []
 postdlfunction:
