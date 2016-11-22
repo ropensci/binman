@@ -49,7 +49,7 @@ download_files <- function(dllist, overwrite = FALSE){
     }
     if(identical(nrow(platformDF), 0L)){
       return(data.frame(platform = character(), file = character(),
-                        processed = logical()))
+                        processed = logical(), stringsAsFactors = FALSE))
     }
     res <- Map(dl_files,
                dir = platformDF[["dir"]],

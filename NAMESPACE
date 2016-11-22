@@ -2,6 +2,7 @@
 
 export(assign_directory)
 export(download_files)
+export(noproc_dlfiles)
 export(predl_bitbucket_downloads)
 export(predl_github_assets)
 export(predl_google_storage)
