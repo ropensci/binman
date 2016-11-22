@@ -1,8 +1,11 @@
 Package: binman
-Title: What the Package Does (one line, title case)
-Version: 0.0.1
+Title: A Binary Download Manager
+Version: 0.0.2
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Tools and functions for managing the download of binary files.
+    Binary repositories are defined in YAML format. Defining new 
+    pre-download, download and post-download templates allow additonal 
+    repositories to be added.
 Depends:
     R (>= 3.2)
 License: MIT + file LICENSE
@@ -20,4 +23,7 @@ Imports:
     utils,
     stats,
     assertthat
+URL: https://github.com/johndharrison/binman
+URLNote: https://github.com/johndharrison/binman
+BugReports: https://github.com/johndharrison/binman/issues
 RoxygenNote: 5.0.1
