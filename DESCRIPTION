@@ -1,7 +1,9 @@
 Package: binman
 Title: A Binary Download Manager
 Version: 0.0.2
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Authors@R: c(
+    person("John", "Harrison", , "johndharrison0@gmail.com",
+    role = c("aut", "cre"), comment = "R package binman"))
 Description: Tools and functions for managing the download of binary files.
     Binary repositories are defined in YAML format. Defining new 
     pre-download, download and post-download templates allow additonal 
