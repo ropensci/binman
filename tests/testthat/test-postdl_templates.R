@@ -24,7 +24,9 @@ test_that("canUnzipFile", {
   zout <- file.path(dirname(ziptemp), basename(zfiles[["Name"]]))
   fmode <- file.mode(zout)
   expect_true(all(file.exists(zout)))
-  expect_identical(fmode, structure(c(448L, 448L), class = "octmode"))
+  if(binman:::get_os() != "win"){
+    expect_identical(fmode, structure(c(448L, 448L), class = "octmode"))
+  }
   unlink(zout)
 })
 
@@ -42,6 +44,8 @@ test_that("canUntarFile", {
   gzout <- file.path(dirname(gziptemp), basename(gzfiles))
   fmode <- file.mode(gzout)
   expect_true(all(file.exists(gzout)))
-  expect_identical(fmode, structure(c(448L, 448L), class = "octmode"))
+  if(binman:::get_os() != "win"){
+    expect_identical(fmode, structure(c(448L, 448L), class = "octmode"))
+  }
   unlink(gzout)
 })

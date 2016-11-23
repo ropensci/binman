@@ -11,7 +11,7 @@ unziptar_dlfiles(dlfiles, chmod = FALSE)
 whether they were processed}
 
 \item{chmod}{change the mode of the unarchived file/files to "700" so
-they are executable}
+they are executable on unix like systems.}
 }
 \value{
 Returns a list of character vectors indicating files

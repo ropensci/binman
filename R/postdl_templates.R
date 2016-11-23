@@ -5,7 +5,7 @@
 #' @param dlfiles A data.frame of files by platform and indicating
 #'     whether they were processed
 #' @param chmod change the mode of the unarchived file/files to "700" so
-#'     they are executable
+#'     they are executable on unix like systems.
 #'
 #' @return Returns a list of character vectors indicating files
 #'     processed
@@ -38,6 +38,7 @@ unziptar_dlfiles <- function(dlfiles, chmod = FALSE){
     exdir <- dirname(file)
     utils::unzip(file, exdir = exdir)
     if(chmod){
+      if(get_os() == "win"){return}
       zfiles <- utils::unzip(file, exdir = exdir, list = TRUE)
       Sys.chmod(file.path(exdir, basename(zfiles[["Name"]])), "700")
     }
@@ -47,6 +48,7 @@ unziptar_dlfiles <- function(dlfiles, chmod = FALSE){
     exdir <- dirname(file)
     utils::untar(file, exdir = exdir)
     if(chmod){
+      if(get_os() == "win"){return}
       gzfiles <- utils::untar(file, exdir = exdir, list = TRUE)
       Sys.chmod(file.path(exdir, basename(gzfiles)), "700")
     }
