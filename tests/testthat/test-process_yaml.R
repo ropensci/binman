@@ -9,7 +9,13 @@ test_that("canProcessYaml", {
       test_llres
     },
     `base::dir.create` = function(...){TRUE},
-    `utils::unzip` = function(zipfile, ...){zipfile},
+    `utils::unzip` = function(zipfile, list = FALSE, ...){
+      if(list){
+        list(Name = zipfile)
+      }else{
+        zipfile
+      }
+    },
     procyml <- process_yaml(ymlfile)
   )
   expect_true(all(vapply(procyml, is.character, logical(1))))
