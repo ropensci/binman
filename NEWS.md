@@ -1,6 +1,7 @@
 # binman 0.0.3
 
 * Added Apveyor CI for windows
+* Update post download zip function to handle tar and chmod
 
 # binman 0.0.2
 
