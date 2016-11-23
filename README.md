@@ -119,73 +119,26 @@ C:\USERS\JOHN\APPDATA\LOCAL\BINMAN\BINMAN_BMPROXY
 #### MACOSX
 
 ```
-DE529:~ admin$ tree /Users/admin/Library/Application\ Support/binman_bmproxy
+DE529:~ admin$ tree -d /Users/admin/Library/Application\ Support/binman_bmproxy
 /Users/admin/Library/Application\ Support/binman_bmproxy
 └── generic
     ├── browsermob-proxy-2.1.0
-    │   ├── browsermob-proxy-2.1.0
-    │   │   ├── LICENSE.txt
-    │   │   ├── README.md
-    │   │   ├── README.txt
-    │   │   ├── bin
-    │   │   │   ├── browsermob-proxy
-    │   │   │   ├── browsermob-proxy.bat
-    │   │   │   └── conf
-    │   │   │       └── bmp-logging.yaml
-    │   │   ├── browsermob-core-2.1.0-javadoc.jar
-    │   │   ├── browsermob-core-2.1.0-sources.jar
-    │   │   ├── browsermob-rest-2.1.0-javadoc.jar
-    │   │   ├── browsermob-rest-2.1.0-sources.jar
-    │   │   ├── lib
-    │   │   │   └── browsermob-dist-2.1.0.jar
-    │   │   └── ssl-support
-    │   │       ├── ca-certificate-ec.cer
-    │   │       ├── ca-certificate-rsa.cer
-    │   │       ├── ca-keystore-ec.p12
-    │   │       └── ca-keystore-rsa.p12
-    │   └── browsermob-proxy-2.1.0-bin.zip
+    │   └── browsermob-proxy-2.1.0
+    │       ├── bin
+    │       │   └── conf
+    │       ├── lib
+    │       └── ssl-support
     ├── browsermob-proxy-2.1.1
-    │   ├── browsermob-proxy-2.1.1
-    │   │   ├── LICENSE.txt
-    │   │   ├── README.md
-    │   │   ├── README.txt
-    │   │   ├── bin
-    │   │   │   ├── browsermob-proxy
-    │   │   │   ├── browsermob-proxy.bat
-    │   │   │   └── conf
-    │   │   │       └── bmp-logging.yaml
-    │   │   ├── browsermob-core-2.1.1-javadoc.jar
-    │   │   ├── browsermob-core-2.1.1-sources.jar
-    │   │   ├── browsermob-rest-2.1.1-javadoc.jar
-    │   │   ├── browsermob-rest-2.1.1-sources.jar
-    │   │   ├── lib
-    │   │   │   └── browsermob-dist-2.1.1.jar
-    │   │   └── ssl-support
-    │   │       ├── ca-certificate-ec.cer
-    │   │       ├── ca-certificate-rsa.cer
-    │   │       ├── ca-keystore-ec.p12
-    │   │       └── ca-keystore-rsa.p12
-    │   └── browsermob-proxy-2.1.1-bin.zip
+    │   └── browsermob-proxy-2.1.1
+    │       ├── bin
+    │       │   └── conf
+    │       ├── lib
+    │       └── ssl-support
     └── browsermob-proxy-2.1.2
-        ├── browsermob-proxy-2.1.2
-        │   ├── LICENSE.txt
-        │   ├── README.md
-        │   ├── README.txt
-        │   ├── bin
-        │   │   ├── browsermob-proxy
-        │   │   ├── browsermob-proxy.bat
-        │   │   └── conf
-        │   │       └── bmp-logging.yaml
-        │   ├── browsermob-core-2.1.2-javadoc.jar
-        │   ├── browsermob-core-2.1.2-sources.jar
-        │   ├── browsermob-rest-2.1.2-javadoc.jar
-        │   ├── browsermob-rest-2.1.2-sources.jar
-        │   ├── lib
-        │   │   └── browsermob-dist-2.1.2.jar
-        │   └── ssl-support
-        │       ├── ca-certificate-ec.cer
-        │       ├── ca-certificate-rsa.cer
-        │       ├── ca-keystore-ec.p12
-        │       └── ca-keystore-rsa.p12
-        └── browsermob-proxy-2.1.2-bin.zip
+        └── browsermob-proxy-2.1.2
+            ├── bin
+            │   └── conf
+            ├── lib
+            └── ssl-support
+19 directories
 ```
