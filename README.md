@@ -118,6 +118,7 @@ C:\USERS\JOHN\APPDATA\LOCAL\BINMAN\BINMAN_BMPROXY
 
 #### MACOSX
 
+```
 DE529:~ admin$ tree /Users/admin/Library/Application\ Support/binman_bmproxy
 /Users/admin/Library/Application\ Support/binman_bmproxy
 └── generic
@@ -187,3 +188,4 @@ DE529:~ admin$ tree /Users/admin/Library/Application\ Support/binman_bmproxy
         │       ├── ca-keystore-ec.p12
         │       └── ca-keystore-rsa.p12
         └── browsermob-proxy-2.1.2-bin.zip
+```
