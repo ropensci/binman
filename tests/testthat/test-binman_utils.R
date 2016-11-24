@@ -46,3 +46,20 @@ test_that("canRemoveBinmanAppVersion", {
   appver <- list_versions(appname)
   expect_identical(appver[[platforms[2]]], versions[3])
 })
+
+test_that("canRemoveBinmanAppPlatform", {
+  appname <- "superduperapp"
+  appdir <- app_dir(appname, FALSE)
+  on.exit(unlink(appdir, recursive = TRUE))
+  platforms <- LETTERS[1:4]
+  versions <- LETTERS[5:7]
+  mkdirs <- file.path(appdir, outer(platforms, versions, file.path))
+  chk <- vapply(mkdirs, dir.create, logical(1), recursive = TRUE)
+  expect_true(all(chk))
+  appver <- list_versions(appname)
+  chk <- rm_platform(appname, platforms[1:2])
+  expect_true(all(chk))
+  appver <- list_versions(appname)
+  expect_identical(names(appver), platforms[3:4])
+})
+
