@@ -4,7 +4,7 @@ predlfunction:
     url: https://api.github.com/repos/mozilla/geckodriver/releases
     platform:
     - linux64
-    - mac64
+    - macos
     - win64
     history: 3
     appname: "binman_geckodriver"
