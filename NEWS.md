@@ -1,3 +1,12 @@
+# binman 0.0.4
+
+* Added list_versions function, docs and test to list application version
+  by platform.
+* Added rm_version function, docs and test to remove application versions
+  by platform.
+* Added app_dir function, docs and test to return an applications root
+  directory.
+
 # binman 0.0.3
 
 * Added Apveyor CI for windows

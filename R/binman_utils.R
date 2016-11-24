@@ -84,8 +84,11 @@ rm_version <- function(appname, platform, version = c("ALL")){
   }else{
     versions
   }
-  res <- vapply(file.path(appdir, platform, versions), unlink, integer(1),
-                recursive = TRUE)
+  res <- vapply(versions, function(version){
+    dirpath <-file.path(appdir, platform, version)
+    message("Removing version: ", version, " from platorm: ", platform)
+    unlink(dirpath, recursive = TRUE)
+  }, integer(1))
   invisible(!as.logical(res))
 }
 
