@@ -55,7 +55,8 @@ unziptar_dlfiles <- function(dlfiles, chmod = FALSE){
   }
   unarchive <- function(platform, file, processed, chmod){
     is_zip <- grepl("\\.zip$", file, ignore.case = TRUE)
-    is_tar <- grepl(".*\\.(tgz$)|(tar\\.gz$)", file, ignore.case = TRUE)
+    is_tar <- grepl(".*\\.(tgz$)|(tar\\.gz$)|(tbz2$)|(tar\\.bz2)", file,
+                    ignore.case = TRUE)
     if(!any(c(is_zip, is_tar))){
       stop(file, " does not appear to be a zip or tar file.\n")
     }
