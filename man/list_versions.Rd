@@ -20,7 +20,14 @@ List app versions by platform
 }
 \examples{
 \dontrun{
-x <- 1
+appdir <- app_dir("superduperapp", FALSE)
+platforms <- LETTERS[1:4]
+versions <- LETTERS[5:7]
+mkdirs <- file.path(appdir, outer(platforms, versions, file.path))
+chk <- vapply(mkdirs, dir.create, logical(1), recursive = TRUE)
+expect_true(all(chk))
+res <- list_versions("superduperapp")
+unlink(appdir, recursive = TRUE)
 }
 }
 

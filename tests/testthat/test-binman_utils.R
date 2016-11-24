@@ -1,7 +1,7 @@
 context("binman_utils")
 
 test_that("canListBinmanApp", {
-  appdir <- rappdirs::user_data_dir("superduperapp", "binman")
+  appdir <- app_dir("superduperapp", FALSE)
   on.exit(unlink(appdir, recursive = TRUE))
   platforms <- LETTERS[1:4]
   versions <- LETTERS[5:7]
@@ -14,7 +14,7 @@ test_that("canListBinmanApp", {
 })
 
 test_that("canListPlatformBinmanApp", {
-  appdir <- rappdirs::user_data_dir("superduperapp", "binman")
+  appdir <- app_dir("superduperapp", FALSE)
   on.exit(unlink(appdir, recursive = TRUE))
   platforms <- LETTERS[1:4]
   versions <- LETTERS[5:7]
@@ -24,4 +24,9 @@ test_that("canListPlatformBinmanApp", {
   res <- list_versions("superduperapp", "B")
   expect_identical(names(res), "B")
   expect_true(all(vapply(res, identical, logical(1), versions)))
+})
+
+test_that("canCheckBinmanAppDir", {
+  expect_error(appdir <- app_dir("superduperapp"),
+               "superduperapp app directory not found")
 })

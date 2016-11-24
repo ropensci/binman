@@ -95,3 +95,11 @@ assertthat::on_failure(contains_required) <- function(call, env) {
          " as required by specification."
   )
 }
+
+app_dir_exists <- function(x){
+  dir.exists(x)
+}
+
+assertthat::on_failure(app_dir_exists) <- function(call, env) {
+  paste0(env[[deparse(call$x)]], " app directory not found.")
+}
