@@ -158,7 +158,7 @@ rm_version <- function(appname, platform, version = c("ALL")){
 app_dir <- function(appname, check = TRUE){
   assert_that(is_string(appname))
   assert_that(is_logical(check))
-  appdir <- rappdirs::user_data_dir(appname, "binman")
+  appdir <- rappdirs::user_data_dir(paste0("binman_", appname, "binman"))
   if(check){assert_that(app_dir_exists(appdir))}
   invisible(appdir)
 }

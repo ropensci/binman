@@ -1,4 +1,4 @@
-name: binman-phantomjs
+name: phantomjs
 predlfunction:
   "binman::predl_bitbucket_downloads":
     url: https://api.bitbucket.org/2.0/repositories/ariya/phantomjs/downloads?pagelen=100
@@ -8,7 +8,7 @@ predlfunction:
     - windows
     - macosx
     history: 3
-    appname: "binman_phantomjs"
+    appname: "phantomjs"
     platformregex:
     - "linux-x86_64"
     - "linux-i686"

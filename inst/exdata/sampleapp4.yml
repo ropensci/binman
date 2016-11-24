@@ -1,11 +1,11 @@
-name: binman-seleniumserver
+name: seleniumserver
 predlfunction:
   "binman::predl_google_storage":
     url: https://www.googleapis.com/storage/v1/b/selenium-release/o
     platform:
     - generic
     history: 3
-    appname: "binman_seleniumserver"
+    appname: "seleniumserver"
     platformregex:
     - "selenium-server-standalone"
     fileregex: "\\.jar$"

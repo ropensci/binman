@@ -1,4 +1,4 @@
-name: binman-chromedriver
+name: chromedriver
 predlfunction:
   "binman::predl_google_storage":
     url: https://www.googleapis.com/storage/v1/b/chromedriver/o
@@ -7,7 +7,7 @@ predlfunction:
     - linux64
     - win32
     history: 3
-    appname: "binman_chromedriver"
+    appname: "chromedriver"
 dlfunction:
   "binman::download_files": []
 postdlfunction:
