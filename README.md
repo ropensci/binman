@@ -59,7 +59,7 @@ Downloading the three most recent releases can the be done using:
 process_yaml(ymlfile)
 ```
 
-with resulting directory structure:
+with resulting directory structure (We omit files for brevity):
 
 #### LINUX
 ```
