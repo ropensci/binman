@@ -1,3 +1,9 @@
+# binman 0.0.5
+
+* "binman_" is now prepended to the root directory of an app to prevent 
+  possible name clashes.
+* Add bzip2 file format to unziptar_dlfiles
+
 # binman 0.0.4
 
 * Added list_versions function, docs and test to list application version
