@@ -8,7 +8,8 @@ pretty_message <- function(x, ..., width = getOption("width")){
 }
 
 match_platform <- function(file, platform, platformregex){
-  platind <- vapply(platformregex, grepl, logical(length(file)), file)
+  platind <- vapply(platformregex, grepl, logical(length(file)),
+                    x= file, perl = TRUE)
   plat <- if(is.null(dim(platind))){
     if(sum(platind) > 1){
       stop("File matches more than one platform. Check regex.")
