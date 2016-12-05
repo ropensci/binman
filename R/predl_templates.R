@@ -148,8 +148,7 @@ predl_github_assets <-
 predl_bitbucket_downloads <-
   function(url, platform, history, appname,
            platformregex = platform,
-           versionregex = c(".*(\\d+\\.)?(\\d+\\.)?(*|\\d+).*",
-                            "\\1\\2\\3")){
+           versionregex = "\\d+(?:\\.\\d+)+"){
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
@@ -159,7 +158,8 @@ predl_bitbucket_downloads <-
     bbdata <- jsonlite::fromJSON(url)
     file <- bbdata[["values"]][["name"]]
     url <- bbdata[["values"]][["links"]][["self"]][["href"]]
-    version <- gsub(versionregex[1], versionregex[2], file)
+    vermatch <- regmatches(versionregex, file)
+    version <- regmatches(file, vermatch)
     plat <- match_platform(file, platform, platformregex)
     res <- data.frame(file = file, url = url, version = version,
                       platform = plat, stringsAsFactors = FALSE)
