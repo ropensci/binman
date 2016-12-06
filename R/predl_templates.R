@@ -158,7 +158,7 @@ predl_bitbucket_downloads <-
     bbdata <- jsonlite::fromJSON(url)
     file <- bbdata[["values"]][["name"]]
     url <- bbdata[["values"]][["links"]][["self"]][["href"]]
-    vermatch <- regmatches(versionregex, file)
+    vermatch <- regexpr(versionregex, file)
     version <- regmatches(file, vermatch)
     plat <- match_platform(file, platform, platformregex)
     res <- data.frame(file = file, url = url, version = version,
