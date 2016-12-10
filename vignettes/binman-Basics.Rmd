@@ -21,7 +21,8 @@ The goal of this vignette is to describe the basic functionality of the
 the downloading of third party binaries. The downloading of binaries is
 split into three parts: the pre-download, the download and the 
 post-download. Each part of the download is controlled by an appropriate 
-function: predlfunction, dlfunction and postdlfunction respectively.
+function: **predlfunction**, **dlfunction** and **postdlfunction** 
+respectively.
 
 ### Pre-Download Function
 
@@ -49,4 +50,28 @@ The download function should take as its primary input the output given by
 `assign_directory` that is a named list of data.frames with column names
 "version", "url", "file", "dir" and "exists". 
 
+The download function should process the list downloading the "url" to the
+given directory "dir" assigning it the filename "file". Whether the 
+download is attempted may be dictated on the value of the "exists" 
+variable (For example an overwrite argument in the download function).
+
+The download function should return a single data.frame with columns 
+"platform", "file" and "processed". The "platform" column indicates what 
+platform the file downloaded relates to. The "file" column gives the full
+path to the downloaded file. The "processed" column indicates whether the
+file was infact downloaded/processed.
+
+
+```
+mydl_fun <- function(dllist, ...){
+# dllist is output from a predlfunction with final output from assign_directory
+# CODE here to perform download  
+  data.frame(
+    platform = platform, 
+    file = file,
+    processed = processed,
+    stringsAsFactors = FALSE
+  )
+}
+```
 ### Post-Download Function
