@@ -19,6 +19,9 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
+  <a href="articles/index.html">Articles</a>
+</li>
+<li>
   <a href="news/index.html">News</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -38,9 +41,11 @@
 <div class="page-header"><h1 class="hasAnchor"><a href="#binman" class="anchor"> </a>binman</h1></div>
 <table><thead><tr class="header"><th align="center">CRAN version</th>
 <th align="center">Travis build status</th>
+<th align="center">Appveyor build status</th>
 <th align="center">Coverage</th>
 </tr></thead><tbody><tr class="odd"><td align="center"></td>
 <td align="center"><a href="https://travis-ci.org/johndharrison/binman"><img src="https://travis-ci.org/johndharrison/binman.svg?branch=master" alt="Build Status"></a></td>
+<td align="center"><a href="https://ci.appveyor.com/project/johndharrison/binman"><img src="https://ci.appveyor.com/api/projects/status/github/johndharrison/binman?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></td>
 <td align="center"><a href="https://codecov.io/gh/johndharrison/binman"><img src="https://codecov.io/gh/johndharrison/binman/branch/master/graph/badge.svg" alt="codecov"></a></td>
 </tr></tbody></table><p>Tools and functions for managing the download of binary files. Binary repositories are defined in YAML format. Defining new pre-download, download and post-download templates allow additonal repositories to be added.</p>
 <div id="installation" class="section level2">
@@ -49,6 +54,114 @@
 <p>You can install binman from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools::<span class="kw">install_github</span>(<span class="st">"johndharrison/binman"</span>)</code></pre></div>
+</div>
+<div id="usage-examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage-examples" class="anchor"> </a>Usage Examples</h2>
+<div id="github-assets" class="section level3">
+<h3 class="hasAnchor">
+<a href="#github-assets" class="anchor"> </a>Github Assets</h3>
+<p>The following is an example of using binman to get the github assets from a project. The project is <a href="https://github.com/lightbody/browsermob-proxy/releases" class="uri">https://github.com/lightbody/browsermob-proxy/releases</a> . When a new version is released a zipped binary is added as an &ldquo;asset&rdquo;. A JSON representation of the project releases is available at <a href="https://api.github.com/repos/lightbody/browsermob-proxy/releases" class="uri">https://api.github.com/repos/lightbody/browsermob-proxy/releases</a>. <code>binman</code> needs a YAML file to specify how to parse this projects assets:</p>
+<pre><code>name: binman-bmproxy
+predlfunction:
+  "binman::predl_github_assets":
+    url: https://api.github.com/repos/lightbody/browsermob-proxy/releases
+    platform:
+    - generic
+    history: 3
+    appname: "binman_bmproxy"
+    platformregex: browsermob-proxy
+dlfunction:
+  "binman::download_files": []
+postdlfunction:
+  "binman::unziptar_dlfiles": []</code></pre>
+<p>The file can be accessed at:</p>
+<pre><code>ymlfile &lt;- system.file("examples", "yaml", "bmproxy.yml", package="binman")
+</code></pre>
+<p>Downloading the three most recent releases can the be done using:</p>
+<pre><code><a href="reference/process_yaml.html">process_yaml(ymlfile)</a></code></pre>
+<p>with resulting directory structure (We omit files for brevity):</p>
+<div id="linux" class="section level4">
+<h4 class="hasAnchor">
+<a href="#linux" class="anchor"> </a>LINUX</h4>
+<pre><code>john@ubuntu:~$ tree -d /home/john/.local/share/binman_bmproxy
+/home/john/.local/share/binman_bmproxy
+&#9492;&#9472;&#9472; generic
+    &#9500;&#9472;&#9472; browsermob-proxy-2.1.0
+    &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; browsermob-proxy-2.1.0
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; bin
+    &#9474;&nbsp;&nbsp;     &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; conf
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; lib
+    &#9474;&nbsp;&nbsp;     &#9492;&#9472;&#9472; ssl-support
+    &#9500;&#9472;&#9472; browsermob-proxy-2.1.1
+    &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; browsermob-proxy-2.1.1
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; bin
+    &#9474;&nbsp;&nbsp;     &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; conf
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; lib
+    &#9474;&nbsp;&nbsp;     &#9492;&#9472;&#9472; ssl-support
+    &#9492;&#9472;&#9472; browsermob-proxy-2.1.2
+        &#9492;&#9472;&#9472; browsermob-proxy-2.1.2
+            &#9500;&#9472;&#9472; bin
+            &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; conf
+            &#9500;&#9472;&#9472; lib
+            &#9492;&#9472;&#9472; ssl-support
+
+19 directories</code></pre>
+</div>
+<div id="windows" class="section level4">
+<h4 class="hasAnchor">
+<a href="#windows" class="anchor"> </a>WINDOWS</h4>
+<pre><code>C:\Users\john&gt;tree C:\Users\john\AppData\Local\binman\binman_bmproxy
+Folder PATH listing
+Volume serial number is 7CC8-BD03
+C:\USERS\JOHN\APPDATA\LOCAL\BINMAN\BINMAN_BMPROXY
+&#9492;&#9472;&#9472;&#9472;generic
+    &#9500;&#9472;&#9472;&#9472;browsermob-proxy-2.1.0
+    &#9474;   &#9492;&#9472;&#9472;&#9472;browsermob-proxy-2.1.0
+    &#9474;       &#9500;&#9472;&#9472;&#9472;bin
+    &#9474;       &#9474;   &#9492;&#9472;&#9472;&#9472;conf
+    &#9474;       &#9500;&#9472;&#9472;&#9472;lib
+    &#9474;       &#9492;&#9472;&#9472;&#9472;ssl-support
+    &#9500;&#9472;&#9472;&#9472;browsermob-proxy-2.1.1
+    &#9474;   &#9492;&#9472;&#9472;&#9472;browsermob-proxy-2.1.1
+    &#9474;       &#9500;&#9472;&#9472;&#9472;bin
+    &#9474;       &#9474;   &#9492;&#9472;&#9472;&#9472;conf
+    &#9474;       &#9500;&#9472;&#9472;&#9472;lib
+    &#9474;       &#9492;&#9472;&#9472;&#9472;ssl-support
+    &#9492;&#9472;&#9472;&#9472;browsermob-proxy-2.1.2
+        &#9492;&#9472;&#9472;&#9472;browsermob-proxy-2.1.2
+            &#9500;&#9472;&#9472;&#9472;bin
+            &#9474;   &#9492;&#9472;&#9472;&#9472;conf
+            &#9500;&#9472;&#9472;&#9472;lib
+            &#9492;&#9472;&#9472;&#9472;ssl-support</code></pre>
+</div>
+<div id="macosx" class="section level4">
+<h4 class="hasAnchor">
+<a href="#macosx" class="anchor"> </a>MACOSX</h4>
+<pre><code>DE529:~ admin$ tree -d /Users/admin/Library/Application\ Support/binman_bmproxy
+/Users/admin/Library/Application\ Support/binman_bmproxy
+&#9492;&#9472;&#9472; generic
+    &#9500;&#9472;&#9472; browsermob-proxy-2.1.0
+    &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; browsermob-proxy-2.1.0
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; bin
+    &#9474;&nbsp;&nbsp;     &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; conf
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; lib
+    &#9474;&nbsp;&nbsp;     &#9492;&#9472;&#9472; ssl-support
+    &#9500;&#9472;&#9472; browsermob-proxy-2.1.1
+    &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; browsermob-proxy-2.1.1
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; bin
+    &#9474;&nbsp;&nbsp;     &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; conf
+    &#9474;&nbsp;&nbsp;     &#9500;&#9472;&#9472; lib
+    &#9474;&nbsp;&nbsp;     &#9492;&#9472;&#9472; ssl-support
+    &#9492;&#9472;&#9472; browsermob-proxy-2.1.2
+        &#9492;&#9472;&#9472; browsermob-proxy-2.1.2
+            &#9500;&#9472;&#9472; bin
+            &#9474;&nbsp;&nbsp; &#9492;&#9472;&#9472; conf
+            &#9500;&#9472;&#9472; lib
+            &#9492;&#9472;&#9472; ssl-support
+19 directories</code></pre>
+</div>
+</div>
 </div>
 </div>
   </div>

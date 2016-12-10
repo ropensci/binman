@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>binman. — binman • binman</title>
+<title>Remove application version — rm_version • binman</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,20 +77,53 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>binman.</h1>
+    <h1>Remove application version</h1>
     </div>
 
     
-    <p>binman.</p>
+    <p>Remove application version for a given platform</p>
     
 
-        
+    <pre><span class='fu'>rm_version</span>(<span class='no'>appname</span>, <span class='no'>platform</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ALL"</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <dl class="dl-horizontal">
+      <dt>appname</dt>
+      <dd>A character string giving the name of the application</dd>
+      <dt>platform</dt>
+      <dd>A character string indicating the platform.</dd>
+      <dt>version</dt>
+      <dd>A character vector of versions to remove. Defaults to
+&quot;ALL&quot;</dd>
+    </dl>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns a logical vector indicating whether the removal of
+    version was successful. Return is invisible.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># appdir &lt;- app_dir(appname, FALSE)</span>
+<span class='co'># platforms &lt;- LETTERS[1:4]</span>
+<span class='co'># versions &lt;- LETTERS[5:7]</span>
+<span class='co'># mkdirs &lt;- file.path(appdir, outer(platforms, versions, file.path))</span>
+<span class='co'># chk &lt;- vapply(mkdirs, dir.create, logical(1), recursive = TRUE)</span>
+<span class='co'># appver &lt;- list_versions(appname)</span>
+<span class='co'># rm_version(appname, platforms[2], versions[1:2])</span>
+<span class='co'># unlink(appdir, recursive = TRUE)</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
