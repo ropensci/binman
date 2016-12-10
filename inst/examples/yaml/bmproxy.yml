@@ -8,6 +8,9 @@ predlfunction:
     appname: "bmproxy"
     platformregex:
     - "browsermob-proxy"
+    versionregex:
+    - "browsermob-proxy-(.*)$"
+    - "\\1"
 dlfunction:
   "binman::download_files": []
 postdlfunction:

@@ -26,7 +26,7 @@ respectively.
 
 ### Pre-Download Function
 
-The pre-download function should return upto its final point a named list 
+The pre-download function should return up-to its final point a named list 
 of data.frames. The name of each data.frame corresponds to a "platform". 
 Each individual data.frame should be composed of three columns namely
 "version", "url" and "file". This named list of data.frames can then be 
@@ -51,7 +51,7 @@ The download function should take as its primary input the output given by
 "version", "url", "file", "dir" and "exists". 
 
 The download function should process the list downloading the "url" to the
-given directory "dir" assigning it the filename "file". Whether the 
+given directory "dir" assigning it the file-name "file". Whether the 
 download is attempted may be dictated on the value of the "exists" 
 variable (For example an overwrite argument in the download function).
 
@@ -59,7 +59,7 @@ The download function should return a single data.frame with columns
 "platform", "file" and "processed". The "platform" column indicates what 
 platform the file downloaded relates to. The "file" column gives the full
 path to the downloaded file. The "processed" column indicates whether the
-file was infact downloaded/processed.
+file was  downloaded/processed.
 
 
 ```
@@ -75,3 +75,273 @@ mydl_fun <- function(dllist, ...){
 }
 ```
 ### Post-Download Function
+
+The post-download function takes as its primary input the output given by 
+a "download function" that is a data.frame with column names
+"platform", "file" and "processed".
+
+The purpose of the post-download function is to process the downloaded 
+files after the download. This could involve changing the file properties 
+such as the mode, unzip/untar a downloaded zip/tar file etc.
+
+### Application YAML file
+
+The three functions mentioned previously are combined together to define a
+process for downloading the binary file. The user stipulates the required 
+functions and arguments by way of a YAML format file. For example:
+
+```
+name: superduperapp
+predlfunction:
+  "superduperapp::predl_superduper":
+    appname: "superduperapp"
+dlfunction:
+  "superduperapp::download_superduper": []
+postdlfunction:
+  "superduperapp::postdl_superduper": []
+```
+
+The defined YAML file is then processed by the `process_yaml` function. 
+The YAML file needs to define the three required functions with any 
+arguments and also define a name.
+
+## Browser Mob Proxy example
+
+The following is an example of using binman to get the github assets from a project. The project is https://github.com/lightbody/browsermob-proxy/releases . When a new version is released a zipped binary is added as an "asset". A JSON representation of the project releases is available at https://api.github.com/repos/lightbody/browsermob-proxy/releases. 
+We shall breakdown the process into its three functional parts.
+
+### BMP Pre-Download
+
+Firstly we note we have JSON data so we parse the JSON from the URL:
+
+```
+bmpURL <- "https://api.github.com/repos/lightbody/browsermob-proxy/releases"
+bmpData <- jsonlite::fromJSON(bmpURL)
+```
+This gives us a list of 10 releases. A github release (https://help.github.com/articles/creating-releases/) should have a version 
+number. 
+
+```
+version <- bmpData[["tag_name"]]
+> version
+ [1] "browsermob-proxy-2.1.2"        "browsermob-proxy-2.1.1"       
+ [3] "browsermob-proxy-2.1.0"        "browsermob-proxy-2.1.0-beta-6"
+ [5] "browsermob-proxy-2.1.0-beta-5" "browsermob-proxy-2.1.0-beta-4"
+ [7] "browsermob-proxy-2.1.0-beta-3" "browsermob-proxy-2.1.0-beta-2"
+ [9] "browsermob-proxy-2.1.0-beta-1" "browsermob-proxy-2.0.0"       
+```
+This is our version data but we may want to tidy it up so:
+
+```
+versionregex <- c("browsermob-proxy-(.*)$", "\\1")
+version <- gsub(versionregex[1], versionregex[2], version)
+> version
+ [1] "2.1.2"        "2.1.1"        "2.1.0"        "2.1.0-beta-6" "2.1.0-beta-5"
+ [6] "2.1.0-beta-4" "2.1.0-beta-3" "2.1.0-beta-2" "2.1.0-beta-1" "2.0.0"       
+```
+
+Each release has "assets" associated with it (a zip file). 
+
+```
+assets <- bmpData[["assets"]]
+> length(assets)
+[1] 10
+```
+The assets will contain the other information we need for our pre-download function.
+
+From each assets item we would like the file-name:
+
+```
+bmpFiles <- vapply(assets, "[[", character(1), "name")
+> bmpFiles
+ [1] "browsermob-proxy-2.1.2-bin.zip"        "browsermob-proxy-2.1.1-bin.zip"       
+ [3] "browsermob-proxy-2.1.0-bin.zip"        "browsermob-proxy-2.1.0-beta-6-bin.zip"
+ [5] "browsermob-proxy-2.1.0-beta-5-bin.zip" "browsermob-proxy-2.1.0-beta-4-bin.zip"
+ [7] "browsermob-proxy-2.1.0-beta-3-bin.zip" "browsermob-proxy-2.1.0-beta-2-bin.zip"
+ [9] "browsermob-proxy-2.1.0-beta-1-bin.zip" "browsermob-proxy-2.0.0-bin.zip"       
+```
+
+and the URL for that file:
+
+```
+bmpURLs <- vapply(assets, "[[", character(1), "browser_download_url")
+> bmpURLs
+ [1] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.2/browsermob-proxy-2.1.2-bin.zip"              
+ [2] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.1/browsermob-proxy-2.1.1-bin.zip"              
+ [3] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0/browsermob-proxy-2.1.0-bin.zip"              
+ [4] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0-beta-6/browsermob-proxy-2.1.0-beta-6-bin.zip"
+ [5] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0-beta-5/browsermob-proxy-2.1.0-beta-5-bin.zip"
+ [6] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0-beta-4/browsermob-proxy-2.1.0-beta-4-bin.zip"
+ [7] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0-beta-3/browsermob-proxy-2.1.0-beta-3-bin.zip"
+ [8] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0-beta-2/browsermob-proxy-2.1.0-beta-2-bin.zip"
+ [9] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0-beta-1/browsermob-proxy-2.1.0-beta-1-bin.zip"
+[10] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.0.0/browsermob-proxy-2.0.0-bin.zip" 
+```
+
+In the case of BMP we have a single platform which we could denote "generic".
+So we could pass the following:
+
+```
+dllist <- list(
+  "generic" = data.frame(version = version,
+                         url = bmpURLs,
+                         file = bmpFiles,
+                         stringsAsFactors = FALSE)
+)
+```
+
+Then finally we pass this list to the `assign_directory` function:
+
+```
+predlOut <- assign_directory(dllist, "bmpApp")
+> str(predlOut, max.level = 2)
+List of 1
+ $ generic:'data.frame':	10 obs. of  5 variables:
+  ..$ version: chr [1:10] "2.1.2" "2.1.1" "2.1.0" "2.1.0-beta-6" ...
+  ..$ url    : chr [1:10] "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.2/browsermob-proxy-2.1.2-bin.zip" "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.1/browsermob-proxy-2.1.1-bin.zip" "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0/browsermob-proxy-2.1.0-bin.zip" "https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0-beta-6/browsermob-proxy-2.1.0-beta-6-bin"| __truncated__ ...
+  ..$ file   : chr [1:10] "browsermob-proxy-2.1.2-bin.zip" "browsermob-proxy-2.1.1-bin.zip" "browsermob-proxy-2.1.0-bin.zip" "browsermob-proxy-2.1.0-beta-6-bin.zip" ...
+  ..$ dir    :List of 10
+  ..$ exists : logi [1:10] FALSE FALSE FALSE FALSE FALSE FALSE ...
+
+```
+
+In the `binman` package there is a function template for github asset type
+downloads:
+
+```
+dllist <- predl_github_assets(
+  url = "https://api.github.com/repos/lightbody/browsermob-proxy/releases",
+  history = 3L, 
+  platform = "generic",
+  appname = "bmproxy", 
+  platformregex = "browsermob-proxy",
+  versionregex = c("browsermob-proxy-(.*)$", "\\1")
+)
+
+```
+There are some extra arguments for generality but it basically performs 
+the operations we outlined above.
+
+### BMP Download
+
+The download for BMP is straightforward:
+
+```
+> dllist[["generic"]][1,]
+  version
+1   2.1.2
+                                                                                                                    url
+1 https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.2/browsermob-proxy-2.1.2-bin.zip
+                            file                                                  dir
+1 browsermob-proxy-2.1.2-bin.zip /home/john/.local/share/binman_bmproxy/generic/2.1.2
+  exists
+1  FALSE
+```
+
+For each platform (there is only one "generic" platform in this case) we 
+want to loop over the data.frame downloading the data at "url" to the "file"
+in the "dir". If it already "exists" we may not perform the download.
+
+In `binman` there is a simple template function for this:
+
+```
+dlfiles <- download_files(dllist)
+```
+
+So we simply need to pass the list from the pre download function to this
+download function.
+
+
+### BMP Post Download
+
+The files we receive from the Browser mob Proxy project are zipped. As 
+a post processing operation we would like to unzip these files. The result
+of unzipping the files is a directory structure. In this case we do not 
+change the mode of the ultimate binary which is contained in this 
+directory structure.
+
+Again `binman` has a simple template function to unzip/untar a downloaded
+file so we pass our output from the download to this:
+
+```
+dlres <- unziptar_dlfiles(dlfiles)
+```
+
+### BMP YAML
+
+We can incorporate our three functional calls into a YAML file for the 
+Browser Mob Proxy application as follows:
+
+```
+name: bmproxy
+predlfunction:
+  "binman::predl_github_assets":
+    url: "https://api.github.com/repos/lightbody/browsermob-proxy/releases"
+    platform:
+    - generic
+    history: 3
+    appname: "bmproxy"
+    platformregex:
+    - "browsermob-proxy"
+    versionregex:
+    - "browsermob-proxy-(.*)$"
+    - "\\1"
+dlfunction:
+  "binman::download_files": []
+postdlfunction:
+  "binman::unziptar_dlfiles": []
+```
+
+We have saved this file in the `binman` package:
+
+```
+ymlfile <- system.file("examples", "yaml", "bmproxy.yml", package="binman")
+```
+
+We can now use the `process-yaml` function to download the BMP binaries:
+
+```
+> process_yaml(ymlfile)
+BEGIN: PREDOWNLOAD
+BEGIN: DOWNLOAD
+Creating directory: /home/john/.local/share/binman_bmproxy/generic/2.1.2
+Downloading binary: https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.2/browsermob-proxy-2.1.2-...
+
+Creating directory: /home/john/.local/share/binman_bmproxy/generic/2.1.1
+Downloading binary: https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.1/browsermob-proxy-2.1.1-...
+
+Creating directory: /home/john/.local/share/binman_bmproxy/generic/2.1.0
+Downloading binary: https://github.com/lightbody/browsermob-proxy/releases/download/browsermob-proxy-2.1.0/browsermob-proxy-2.1.0-...
+
+BEGIN: POSTDOWNLOAD
+```
+
+Looking at the resulting directory structure (this is for Linux the location
+of directories will be OS dependent):
+
+```
+john@ubuntu:~$ tree -d /home/john/.local/share/binman_bmproxy
+/home/john/.local/share/binman_bmproxy
+└── generic
+    ├── 2.1.0
+    │   └── browsermob-proxy-2.1.0
+    │       ├── bin
+    │       │   └── conf
+    │       ├── lib
+    │       └── ssl-support
+    ├── 2.1.1
+    │   └── browsermob-proxy-2.1.1
+    │       ├── bin
+    │       │   └── conf
+    │       ├── lib
+    │       └── ssl-support
+    └── 2.1.2
+        └── browsermob-proxy-2.1.2
+            ├── bin
+            │   └── conf
+            ├── lib
+            └── ssl-support
+```
+
+We see that `binman` has downloaded and unzipped the binaries to 
+appropriate directories.
