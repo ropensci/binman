@@ -15,7 +15,9 @@ Encoding: UTF-8
 LazyData: true
 Suggests:
     testthat,
-    covr
+    covr,
+    knitr,
+    rmarkdown
 Imports:
     rappdirs,
     yaml,
@@ -29,3 +31,4 @@ URL: https://github.com/johndharrison/binman
 URLNote: https://github.com/johndharrison/binman
 BugReports: https://github.com/johndharrison/binman/issues
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr

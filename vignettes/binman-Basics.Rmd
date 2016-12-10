@@ -1,0 +1,52 @@
+---
+title: "binman: Basics"
+author: "John D Harrison"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{binman: Basics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The goal of this vignette is to describe the basic functionality of the 
+`binman` package.
+
+## Introduction
+
+`binman` (Binary Manager) is an R package that allows the user to manage
+the downloading of third party binaries. The downloading of binaries is
+split into three parts: the pre-download, the download and the 
+post-download. Each part of the download is controlled by an appropriate 
+function: predlfunction, dlfunction and postdlfunction respectively.
+
+### Pre-Download Function
+
+The pre-download function should return upto its final point a named list 
+of data.frames. The name of each data.frame corresponds to a "platform". 
+Each individual data.frame should be composed of three columns namely
+"version", "url" and "file". This named list of data.frames can then be 
+passed to the `assign_directory` function. 
+
+```
+mypredl_fun <- function(...){
+# code to return named list of data.frames
+  assign_directory(mynamedlist, "myappname")
+}
+```
+
+#### How directories are assigned
+
+Directories are assigned using the `rappdirs` package. See `rappdirs::user_data_dir`
+for more OS specific information.
+
+### Download Function
+
+The download function should take as its primary input the output given by 
+`assign_directory` that is a named list of data.frames with column names
+"version", "url", "file", "dir" and "exists". 
+
+### Post-Download Function
