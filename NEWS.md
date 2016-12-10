@@ -1,3 +1,7 @@
+# binman 0.0.6
+
+* Added a vignette on basic functionality of binman.
+
 # binman 0.0.5
 
 * "binman_" is now prepended to the root directory of an app to prevent 
