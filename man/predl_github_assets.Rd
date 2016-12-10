@@ -4,7 +4,8 @@
 \alias{predl_github_assets}
 \title{Pre download Github assets}
 \usage{
-predl_github_assets(url, platform, history, appname, platformregex = platform)
+predl_github_assets(url, platform, history, appname, platformregex = platform,
+  versionregex = c("", ""))
 }
 \arguments{
 \item{url}{A url giving the github asset JSON for a project. As an
@@ -19,6 +20,8 @@ https://api.github.com/repos/mozilla/geckodriver/releases}
 \item{appname}{Name of the app}
 
 \item{platformregex}{A filter for platforms. Defaults to the platform}
+
+\item{versionregex}{A regex for retrieving the version.}
 }
 \value{
 A named list of data.frames. The name indicates the

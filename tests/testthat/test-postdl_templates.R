@@ -25,7 +25,7 @@ test_that("canUnzipFile", {
   fmode <- file.mode(zout)
   expect_true(all(file.exists(zout)))
   if(binman:::get_os() != "win"){
-    expect_identical(fmode, structure(c(448L, 448L), class = "octmode"))
+    expect_identical(fmode, structure(c(493L, 493L), class = "octmode"))
   }
   unlink(zout)
 })
@@ -45,7 +45,7 @@ test_that("canUntarFile", {
   fmode <- file.mode(gzout)
   expect_true(all(file.exists(gzout)))
   if(binman:::get_os() != "win"){
-    expect_identical(fmode, structure(c(448L, 448L), class = "octmode"))
+    expect_identical(fmode, structure(c(493L, 493L), class = "octmode"))
   }
   unlink(gzout)
 })

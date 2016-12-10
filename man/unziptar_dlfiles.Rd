@@ -10,7 +10,7 @@ unziptar_dlfiles(dlfiles, chmod = FALSE)
 \item{dlfiles}{A data.frame of files by platform and indicating
 whether they were processed}
 
-\item{chmod}{change the mode of the unarchived file/files to "700" so
+\item{chmod}{change the mode of the unarchived file/files to "755" so
 they are executable on unix like systems.}
 }
 \value{

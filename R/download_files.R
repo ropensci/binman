@@ -32,11 +32,11 @@ download_files <- function(dllist, overwrite = FALSE){
   assert_that(is_logical(overwrite))
   dl_files <- function(dir, file, url){
     if(!dir.exists(dir)){
-      pretty_message(paste0("Creating directory: ", dir, "\n"))
+      pretty_message(paste0("Creating directory: ", dir))
       chk <- dir.create(dir, recursive = TRUE)
       stopifnot(chk)
     }
-    pretty_message(paste0("Downloading binary: ", url, "\n"))
+    pretty_message(paste0("Downloading binary: ", url), "\n")
     wd <- httr::write_disk(file.path(dir, file), overwrite = TRUE)
     res <- httr::GET(url, wd)
     httr::stop_for_status(res)

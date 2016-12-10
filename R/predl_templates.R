@@ -73,6 +73,7 @@ predl_google_storage <-
 #' @param history The maximum number of files to get for a platform
 #' @param appname Name of the app
 #' @param platformregex A filter for platforms. Defaults to the platform
+#' @param versionregex A regex for retrieving the version.
 #'
 #' @return A named list of data.frames. The name indicates the
 #'     platform. The data.frame should contain the version, url and file
@@ -90,7 +91,8 @@ predl_google_storage <-
 #' }
 
 predl_github_assets <-
-  function(url, platform, history, appname, platformregex = platform){
+  function(url, platform, history, appname, platformregex = platform,
+           versionregex = c("", "")){
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
@@ -98,6 +100,7 @@ predl_github_assets <-
     assert_that(is_character(platformregex))
     ghdata <- jsonlite::fromJSON(url)
     version <- ghdata[["tag_name"]]
+    version <- gsub(versionregex[1], versionregex[2], version)
     get_args <- function(version, assets){
       file <- assets[["name"]]
       url <- assets[["browser_download_url"]]
