@@ -5,8 +5,8 @@ Authors@R: c(
     person("John", "Harrison", , "johndharrison0@gmail.com",
     role = c("aut", "cre"), comment = "R package binman"))
 Description: Tools and functions for managing the download of binary files.
-    Binary repositories are defined in YAML format. Defining new 
-    pre-download, download and post-download templates allow additonal 
+    Binary repositories are defined in 'YAML' format. Defining new 
+    pre-download, download and post-download templates allow additional 
     repositories to be added.
 Depends:
     R (>= 3.2)
