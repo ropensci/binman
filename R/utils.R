@@ -40,7 +40,3 @@ get_os <- function (){
     stop("Unknown OS")
   }
 }
-
-list_appfiles <- function(appname){
-
-}

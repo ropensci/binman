@@ -1,3 +1,7 @@
+# binman 0.0.8
+
+* Add semantic version parsing.
+
 # binman 0.0.6
 
 * Added a vignette on basic functionality of binman.

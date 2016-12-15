@@ -45,6 +45,8 @@ test_that("canRemoveBinmanAppVersion", {
   expect_true(all(chk))
   appver <- list_versions(appname)
   expect_identical(appver[[platforms[2]]], versions[3])
+  chk <- rm_version(appname, platforms[2])
+  expect_true(all(chk))
 })
 
 test_that("canRemoveBinmanAppPlatform", {
@@ -61,5 +63,23 @@ test_that("canRemoveBinmanAppPlatform", {
   expect_true(all(chk))
   appver <- list_versions(appname)
   expect_identical(names(appver), platforms[3:4])
+  chk <- rm_platform(appname)
+  expect_true(all(chk))
 })
 
+test_that("canThrowUtilErrors", {
+  appname <- "superduperapp"
+  appdir <- app_dir(appname, FALSE)
+  on.exit(unlink(appdir, recursive = TRUE))
+  platforms <- LETTERS[1:4]
+  versions <- LETTERS[5:7]
+  mkdirs <- file.path(appdir, outer(platforms, versions, file.path))
+  chk <- vapply(mkdirs, dir.create, logical(1), recursive = TRUE)
+  expect_true(all(chk))
+  expect_error(list_versions("superduperapp", "nothere"),
+               "No platforms found")
+  expect_error(rm_platform("superduperapp", "nothere"),
+               "No platforms found")
+  expect_error(rm_version("superduperapp", "A", "nothere"),
+               "No versions found")
+})
