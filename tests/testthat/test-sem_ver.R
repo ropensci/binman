@@ -52,11 +52,13 @@ test_that("canPrintSV", {
 })
 
 test_that("canCompareChracter", {
+  res <- sem_ver(testPV)
   expect_true(res[[2]] == "1.0.0")
   expect_true("1.0.0" == res[[2]])
 })
 
 test_that("canThrowSvError", {
+  res <- sem_ver(testPV)
   expect_error(!res[[1]], "unary ! not defined for \"semver\" objects")
   expect_error(!res[1], "unary ! not defined for \"svlist\" objects")
   expect_error(sem_ver("1.1"), "does not parse under semantic")
