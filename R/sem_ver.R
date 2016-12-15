@@ -91,10 +91,10 @@ Ops.semver <- function(e1, e2){
     stop(gettextf("%s not defined for \"semver\" objects",
                   .Generic), domain = NA)
   if(!inherits(e1, "semver")){
-    e1 <- sem_ver(e1)
+    e1 <- sem_ver(e1)[[1]]
   }
   if(!inherits(e2, "semver")){
-    e2 <- sem_ver(e2)
+    e2 <- sem_ver(e2)[[1]]
   }
   a1 <- integer(5L)
   a2 <- integer(5L)
