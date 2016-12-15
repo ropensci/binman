@@ -1,6 +1,6 @@
 Package: binman
 Title: A Binary Download Manager
-Version: 0.0.7
+Version: 0.0.8
 Authors@R: c(
     person("John", "Harrison", , "johndharrison0@gmail.com",
     role = c("aut", "cre"), comment = "R package binman"))
