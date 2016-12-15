@@ -5,7 +5,7 @@ testPV <- test_sem_ver()
 test_that("canParseSemanticVersions", {
   res <- sem_ver(testPV)
   expect_s3_class(res, "svlist")
-  expect_s4_class(res[[1]], "semver")
+  expect_s3_class(res[[1]], "semver")
 })
 
 test_that("canUseOpsSemver", {
