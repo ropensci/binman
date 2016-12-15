@@ -30,10 +30,13 @@ test_that("canUseOpsSvlist", {
                "> not defined for \"svlist\" objects of unequal length")
 })
 
-test_that("canSortSvlist", {
+test_that("canSortSvlistAndReverse", {
   res <- sem_ver(testPV)
   sorted <- sort(res)
   sorted2 <- res[order(res)]
+  expect_true(all(sorted == sorted2))
+  sorted <- sort(res, decreasing = TRUE)
+  sorted2 <- res[order(res, decreasing = TRUE)]
   expect_true(all(sorted == sorted2))
 })
 
