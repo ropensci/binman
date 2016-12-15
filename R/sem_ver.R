@@ -88,7 +88,7 @@ Ops.semver <- function(e1, e2){
   boolean <- switch(.Generic, `<` = , `>` = , `==` = , `!=` = ,
                     `<=` = , `>=` = TRUE, FALSE)
   if (!boolean)
-    stop(gettextf("%s not defined for \"Date\" objects",
+    stop(gettextf("%s not defined for \"semver\" objects",
                   .Generic), domain = NA)
   if(!inherits(e1, "semver")){
     e1 <- sem_ver(e1)
@@ -109,6 +109,28 @@ Ops.semver <- function(e1, e2){
   e1 <- sum(sign(a1-a2)*10^(4:0))
   e2 <- 0L
   NextMethod(.Generic)
+}
+
+#' @export
+
+Ops.svlist <- function(e1, e2){
+  if (nargs() == 1){
+    stop(gettextf("unary %s not defined for \"svlist\" objects",
+                  .Generic), domain = NA)}
+  boolean <- switch(.Generic, `<` = , `>` = , `==` = , `!=` = ,
+                    `<=` = , `>=` = TRUE, FALSE)
+  if (!boolean)
+    stop(gettextf("%s not defined for \"svlist\" objects",
+                  .Generic), domain = NA)
+  if(length(e1) != length(e2)){
+    stop(
+      gettextf("%s not defined for \"svlist\" objects of unequal length",
+               .Generic),
+      domain = NA
+    )
+  }
+  FUN <- get(.Generic, envir = parent.frame(), mode = "function")
+  unlist(Map(FUN, e1 = e1, e2 = e2))
 }
 
 #' @export
