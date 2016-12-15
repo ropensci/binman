@@ -154,6 +154,8 @@ sort.svlist <- function(x, decreasing = FALSE, ...){
   }
 }
 
+#' @export
+
 `[.svlist` <- function(x, i, ...){
   res <- .Primitive("[")(unclass(x), i)
   return(`class<-`(res, "svlist"))
