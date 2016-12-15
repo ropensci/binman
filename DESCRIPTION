@@ -9,7 +9,7 @@ Description: Tools and functions for managing the download of binary files.
     pre-download, download and post-download templates allow additional 
     repositories to be added.
 Depends:
-    R (>= 3.2)
+    R (>= 3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
