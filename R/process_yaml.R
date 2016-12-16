@@ -5,6 +5,7 @@
 #'
 #' @param ymlfile A file in a YAML format defining the pre-download/
 #'     download and post download functions together with their arguments.
+#' @param verbose If TRUE, include status messages (if any)
 #'
 #' @return A list of files processed (downloaded and post processed)
 #' @export
@@ -25,20 +26,23 @@
 #' procyml
 #' }
 
-process_yaml <- function(ymlfile){
+process_yaml <- function(ymlfile, verbose = TRUE){
   ymldata <- yaml::yaml.load_file(ymlfile)
   ymlfuncs <- process_ymldata(ymldata)
-  message("BEGIN: PREDOWNLOAD")
-  dllist <- do.call(ymlfuncs[["predlfunction"]][["function"]],
-                    ymlfuncs[["predlfunction"]][["args"]])
-  message("BEGIN: DOWNLOAD")
-  dlfiles <- do.call(ymlfuncs[["dlfunction"]][["function"]],
-                     c(list(dllist = dllist),
-                       ymlfuncs[["dlfunction"]][["args"]]))
-  message("BEGIN: POSTDOWNLOAD")
-  postproc <- do.call(ymlfuncs[["postdlfunction"]][["function"]],
-                      c(list(dlfiles = dlfiles),
-                        ymlfuncs[["postdlfunction"]][["args"]]))
+  fn <- c(function(x){x}, suppressMessages)[[verbose + 1L]]
+  fn({
+    message("BEGIN: PREDOWNLOAD")
+    dllist <- do.call(ymlfuncs[["predlfunction"]][["function"]],
+                      ymlfuncs[["predlfunction"]][["args"]])
+    message("BEGIN: DOWNLOAD")
+    dlfiles <- do.call(ymlfuncs[["dlfunction"]][["function"]],
+                       c(list(dllist = dllist),
+                         ymlfuncs[["dlfunction"]][["args"]]))
+    message("BEGIN: POSTDOWNLOAD")
+    postproc <- do.call(ymlfuncs[["postdlfunction"]][["function"]],
+                        c(list(dlfiles = dlfiles),
+                          ymlfuncs[["postdlfunction"]][["args"]]))
+  })
 }
 
 process_ymldata <- function(ymldata){
