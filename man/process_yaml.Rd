@@ -4,11 +4,13 @@
 \alias{process_yaml}
 \title{Process a yaml file}
 \usage{
-process_yaml(ymlfile)
+process_yaml(ymlfile, verbose = TRUE)
 }
 \arguments{
 \item{ymlfile}{A file in a YAML format defining the pre-download/
 download and post download functions together with their arguments.}
+
+\item{verbose}{If TRUE, include status messages (if any)}
 }
 \value{
 A list of files processed (downloaded and post processed)
