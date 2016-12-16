@@ -1,3 +1,7 @@
+# binman 0.1.0
+
+* Add verbose argument to process_yaml.
+
 # binman 0.0.8
 
 * Add semantic version parsing.
