@@ -29,7 +29,7 @@
 process_yaml <- function(ymlfile, verbose = TRUE){
   ymldata <- yaml::yaml.load_file(ymlfile)
   ymlfuncs <- process_ymldata(ymldata)
-  fn <- c(function(x){x}, suppressMessages)[[verbose + 1L]]
+  fn <- c(suppressMessages, function(x){x})[[verbose + 1L]]
   fn({
     message("BEGIN: PREDOWNLOAD")
     dllist <- do.call(ymlfuncs[["predlfunction"]][["function"]],
