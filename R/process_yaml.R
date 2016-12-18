@@ -33,16 +33,16 @@ process_yaml <- function(ymlfile, verbose = TRUE){
   fn <- c(suppressMessages, `(`)[[verbose + 1L]]
   fn({
     message("BEGIN: PREDOWNLOAD")
-    dllist <- do.call(ymlfuncs[["predlfunction"]][["function"]],
-                      ymlfuncs[["predlfunction"]][["args"]])
+    dllist <- do.call(ymlfuncs[[c("predlfunction", "function")]],
+                      ymlfuncs[[c("predlfunction", "args")]])
     message("BEGIN: DOWNLOAD")
-    dlfiles <- do.call(ymlfuncs[["dlfunction"]][["function"]],
+    dlfiles <- do.call(ymlfuncs[[c("dlfunction", "function")]],
                        c(list(dllist = dllist),
-                         ymlfuncs[["dlfunction"]][["args"]]))
+                         ymlfuncs[[c("dlfunction", "args")]]))
     message("BEGIN: POSTDOWNLOAD")
-    postproc <- do.call(ymlfuncs[["postdlfunction"]][["function"]],
+    postproc <- do.call(ymlfuncs[[c("postdlfunction", "function")]],
                         c(list(dlfiles = dlfiles),
-                          ymlfuncs[["postdlfunction"]][["args"]]))
+                          ymlfuncs[[c("postdlfunction", "args")]]))
   })
 }
 
