@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Process a yaml file — process_yaml • binman</title>
+<title>Objects exported from other packages — increment_version • binman</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,55 +77,25 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Process a yaml file</h1>
+    <h1>Objects exported from other packages</h1>
     </div>
 
     
-    <p>Process a yaml file. The file defines the pre-download function,
-    the download function and the post download function.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+
+    <p><dl class='dl-horizontal'>
+  <dt>semver</dt><dd><code><a href='http://www.rdocumentation.org/packages/semver/topics/increment_version'>increment_version</a></code></dd>
+</dl></p>
     
 
-    <pre><span class='fu'>process_yaml</span>(<span class='no'>ymlfile</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>ymlfile</dt>
-      <dd>A file in a YAML format defining the pre-download/
-download and post download functions together with their arguments.</dd>
-      <dt>verbose</dt>
-      <dd>If TRUE, include status messages (if any)</dd>
-    </dl>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
 
-    <p>A list of files processed (downloaded and post processed)</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># ymlfile &lt;- system.file("exdata", "sampleapp.yml", package="binman")</span>
-<span class='co'># trdata &lt;- system.file("testdata", "test_dlres.Rdata", package="binman")</span>
-<span class='co'># load(trdata)</span>
-<span class='co'># testthat::with_mock(</span>
-<span class='co'>#   `httr::GET` = function(...){</span>
-<span class='co'>#     test_llres</span>
-<span class='co'>#   },</span>
-<span class='co'>#   `base::dir.create` = function(...){TRUE},</span>
-<span class='co'>#   `utils::unzip` = function(zipfile, ...){zipfile},</span>
-<span class='co'>#   procyml &lt;- process_yaml(ymlfile)</span>
-<span class='co'># )</span>
-<span class='co'># procyml</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>
