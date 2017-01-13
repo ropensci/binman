@@ -3,10 +3,7 @@
 \docType{import}
 \name{parse_version}
 \alias{parse_version}
-\title{Parse semantic version}
-\description{
-See \code{\link[semver]{parse_version}} for more details.
-}
+\title{Objects exported from other packages}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.

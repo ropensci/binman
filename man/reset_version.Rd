@@ -3,10 +3,7 @@
 \docType{import}
 \name{reset_version}
 \alias{reset_version}
-\title{Reset semantic version}
-\description{
-See \code{\link[semver]{reset_version}} for more details.
-}
+\title{Objects exported from other packages}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.

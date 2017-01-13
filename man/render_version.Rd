@@ -3,10 +3,7 @@
 \docType{import}
 \name{render_version}
 \alias{render_version}
-\title{Render semantic version}
-\description{
-See \code{\link[semver]{render_version}} for more details.
-}
+\title{Objects exported from other packages}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.

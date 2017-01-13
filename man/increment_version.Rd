@@ -3,10 +3,7 @@
 \docType{import}
 \name{increment_version}
 \alias{increment_version}
-\title{Increment semantic version}
-\description{
-See \code{\link[semver]{increment_version}} for more details.
-}
+\title{Objects exported from other packages}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.

@@ -3,10 +3,7 @@
 \docType{import}
 \name{set_version}
 \alias{set_version}
-\title{Set semantic version}
-\description{
-See \code{\link[semver]{set_version}} for more details.
-}
+\title{Objects exported from other packages}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
