@@ -40,3 +40,58 @@ get_os <- function (){
     stop("Unknown OS")
   }
 }
+
+#' Parse semantic version
+#'
+#' See \code{\link[semver]{parse_version}} for more details.
+#'
+#' @name parse_version
+#' @rdname parse_version
+#' @importFrom semver parse_version
+#' @keywords internal
+#' @export
+semver::parse_version
+
+#' Render semantic version
+#'
+#' See \code{\link[semver]{render_version}} for more details.
+#'
+#' @name render_version
+#' @rdname render_version
+#' @importFrom semver render_version
+#' @keywords internal
+#' @export
+semver::render_version
+
+#' Set semantic version
+#'
+#' See \code{\link[semver]{set_version}} for more details.
+#'
+#' @name set_version
+#' @rdname set_version
+#' @importFrom semver set_version
+#' @keywords internal
+#' @export
+semver::set_version
+
+#' Reset semantic version
+#'
+#' See \code{\link[semver]{reset_version}} for more details.
+#'
+#' @name reset_version
+#' @rdname reset_version
+#' @importFrom semver reset_version
+#' @keywords internal
+#' @export
+semver::reset_version
+
+#' Increment semantic version
+#'
+#' See \code{\link[semver]{increment_version}} for more details.
+#'
+#' @name increment_version
+#' @rdname increment_version
+#' @importFrom semver increment_version
+#' @keywords internal
+#' @export
+semver::increment_version
