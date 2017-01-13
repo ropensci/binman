@@ -26,7 +26,8 @@ Imports:
     xml2,
     utils,
     stats,
-    assertthat
+    assertthat,
+    semver
 URL: https://github.com/johndharrison/binman
 URLNote: https://github.com/johndharrison/binman
 BugReports: https://github.com/johndharrison/binman/issues
