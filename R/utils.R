@@ -75,3 +75,33 @@ semver::reset_version
 #' @keywords internal
 #' @export
 semver::increment_version
+
+#' Create a connection to a url and read from JSON to an R object
+#' 
+#' A wrapper for jsonlite::fromJSON that will create a curl handle to 
+#' which you can pass additional curl options
+#' @rdname fromJSON_url
+#' @importFrom jsonlite fromJSON
+#' @importFrom curl new_handle handle_setheaders
+#' @param url string for URL
+#' @param .curl_options A named list of options - defaults httr config settings
+#' @keywords internal
+#' @export
+fromJSON_url <- function(url, .curl_options = getOption("httr_config",list(options = list()))[['options']]){
+  
+  if(is_file(url)) {
+    return(jsonlite::fromJSON(url))
+  }
+  
+  h <- curl::new_handle(useragent = paste("jsonlite /", 
+                                          R.version.string),
+                        .list = .curl_options)
+  curl::handle_setheaders(h, Accept = "application/json, text/*, */*")
+  
+  urlConnection <- curl::curl(url = url, handle = h)
+  #on.exit(close.connection(urlConnection))
+  jsonlite::fromJSON(urlConnection)
+}
+
+
+

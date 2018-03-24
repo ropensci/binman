@@ -30,4 +30,3 @@ res <- list_versions("superduperapp")
 unlink(appdir, recursive = TRUE)
 }
 }
-

@@ -41,4 +41,3 @@ gadllist <- predl_github_assets(url = gadata, platform, history = 3L,
                                 appname = "binman_chromedriver")
 }
 }
-

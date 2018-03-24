@@ -42,7 +42,7 @@ predl_google_storage <-
     assert_that(is_string(fileregex))
     assert_that(is_character(platformregex))
     assert_that(is_character(versionregex))
-    ver_data <- jsonlite::fromJSON(url)[["items"]]
+    ver_data <- fromJSON_url(url)[["items"]]
     ver_data <- ver_data[ order(as.numeric(ver_data[["generation"]])), ]
     is_file <- grepl(fileregex, basename(ver_data[["name"]]))
     is_platform <- lapply(platformregex, function(x){
@@ -98,7 +98,7 @@ predl_github_assets <-
     assert_that(is_integer(history))
     assert_that(is_string(appname))
     assert_that(is_character(platformregex))
-    ghdata <- jsonlite::fromJSON(url)
+    ghdata <- fromJSON_url(url)
     version <- ghdata[["tag_name"]]
     version <- gsub(versionregex[1], versionregex[2], version)
     get_args <- function(version, assets){
@@ -158,7 +158,7 @@ predl_bitbucket_downloads <-
     assert_that(is_string(appname))
     assert_that(is_character(platformregex))
     assert_that(is_character(versionregex))
-    bbdata <- jsonlite::fromJSON(url)
+    bbdata <- fromJSON_url(url)
     file <- bbdata[["values"]][["name"]]
     url <- bbdata[["values"]][["links"]][["self"]][["href"]]
     vermatch <- regexpr(versionregex, file)

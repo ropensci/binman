@@ -31,4 +31,3 @@ rm_platform(appname, platforms[2:3])
 unlink(appdir, recursive = TRUE)
 }
 }
-

@@ -22,4 +22,3 @@ Get application directory
 appdir <- app_dir("superduperapp", FALSE)
 }
 }
-

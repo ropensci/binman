@@ -33,4 +33,3 @@ rm_version(appname, platforms[2], versions[1:2])
 unlink(appdir, recursive = TRUE)
 }
 }
-
