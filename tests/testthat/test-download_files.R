@@ -6,11 +6,12 @@ test_that("canDownloadFiles", {
   load(trdata)
   load(tldata)
   dllist <- assign_directory(test_dllist, "myapp")
+  dir.create <- function(...) base::dir.create(...)
   with_mock(
     `httr::GET` = function(...){
       test_llres
     },
-    `base::dir.create` = function(...){TRUE},
+    dir.create = function(...){TRUE},
     dlfiles <- download_files(dllist)
   )
   test_res <- do.call(rbind.data.frame, dlfiles)
@@ -24,11 +25,12 @@ test_that("canReturnEmptyDFWhenEmptyDownloadFiles", {
   load(tldata)
   dllist <- assign_directory(test_dllist, "myapp")
   dllist <- lapply(dllist, function(x){x[["exists"]] <- TRUE; x})
+  dir.create <- function(...) base::dir.create(...)
   with_mock(
     `httr::GET` = function(...){
       test_llres
     },
-    `base::dir.create` = function(...){TRUE},
+    dir.create = function(...){TRUE},
     dlfiles <- download_files(dllist)
   )
   exout <- data.frame(platform = character(), file = character(),

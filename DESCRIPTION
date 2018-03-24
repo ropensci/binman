@@ -27,9 +27,10 @@ Imports:
     utils,
     stats,
     assertthat,
-    semver
+    semver,
+    curl
 URL: https://github.com/johndharrison/binman
 URLNote: https://github.com/johndharrison/binman
 BugReports: https://github.com/johndharrison/binman/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
