@@ -1,9 +1,11 @@
 Package: binman
 Title: A Binary Download Manager
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("John", "Harrison", , "johndharrison0@gmail.com",
-    role = c("aut", "cre"), comment = "R package binman"))
+    role = "aut", comment = "original author"),
+    person("Ju Yeong", "Kim", , "jkim2345@fredhutch.org",
+    role = "cre", comment = "rOpenSci maintainer"))
 Description: Tools and functions for managing the download of binary files.
     Binary repositories are defined in 'YAML' format. Defining new 
     pre-download, download and post-download templates allow additional 
@@ -28,8 +30,8 @@ Imports:
     stats,
     assertthat,
     semver
-URL: https://github.com/johndharrison/binman
-URLNote: https://github.com/johndharrison/binman
-BugReports: https://github.com/johndharrison/binman/issues
+URL: https://github.com/ropensci/binman
+URLNote: https://github.com/ropensci/binman
+BugReports: https://github.com/ropensci/binman/issues
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
