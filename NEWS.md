@@ -1,3 +1,7 @@
+# binman 0.1.1
+
+* Fixed tests for CRAN re-submission.
+
 # binman 0.1.0
 
 * Add verbose argument to process_yaml.
