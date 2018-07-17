@@ -4,6 +4,7 @@
 \name{reset_version}
 \alias{reset_version}
 \title{Objects exported from other packages}
+\keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
@@ -11,5 +12,4 @@ below to see their documentation.
 \describe{
   \item{semver}{\code{\link[semver]{reset_version}}}
 }}
-\keyword{internal}
 

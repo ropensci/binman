@@ -33,5 +33,5 @@ Imports:
 URL: https://github.com/ropensci/binman
 URLNote: https://github.com/ropensci/binman
 BugReports: https://github.com/ropensci/binman/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr

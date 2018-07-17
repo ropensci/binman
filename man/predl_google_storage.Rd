@@ -46,4 +46,3 @@ gsdllist <- predl_google_storage(url = gsdata, platform, history = 5L,
                                  appname = "binman_chromedriver")
 }
 }
-
