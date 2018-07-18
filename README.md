@@ -2,7 +2,7 @@ binman
 ==========================
 | CRAN version       | Travis build status   | Appveyor build status   | Coverage |
 | :-------------: |:-------------:|:-------------:|:-------------:|
-| [![CRAN version](http://www.r-pkg.org/badges/version/binman)](https://cran.r-project.org/package=binman)  | [![Build Status](https://travis-ci.org/ropensci/binman.svg?branch=master)](https://travis-ci.org/ropensci/binman) | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/juyeongkim/binman?branch=master&svg=true)](https://ci.appveyor.com/project/juyeongkim/binman) | [![codecov](https://codecov.io/gh/ropensci/binman/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/binman)|
+| [![CRAN version](http://www.r-pkg.org/badges/version/binman)](https://cran.r-project.org/package=binman)  | [![Build Status](https://travis-ci.org/ropensci/binman.svg?branch=master)](https://travis-ci.org/ropensci/binman) | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/50cv6vybwoxdja1o?svg=true)](https://ci.appveyor.com/project/juyeongkim/binman) | [![codecov](https://codecov.io/gh/ropensci/binman/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/binman)|
 
 Tools and functions for managing the download of binary files.
 Binary repositories are defined in YAML format. Defining new 
