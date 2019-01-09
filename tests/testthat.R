@@ -1,4 +1,6 @@
 library(testthat)
 library(binman)
 
-test_check("binman")
+if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) {
+  test_check("binman")
+}
