@@ -30,7 +30,7 @@ Imports:
     stats,
     assertthat,
     semver
-URL: https://github.com/ropensci/binman
+URL: https://docs.ropensci.org/binman, https://github.com/ropensci/binman
 URLNote: https://github.com/ropensci/binman
 BugReports: https://github.com/ropensci/binman/issues
 RoxygenNote: 6.0.1
