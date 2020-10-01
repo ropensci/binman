@@ -38,7 +38,7 @@ unziptar_dlfiles <- function(dlfiles, chmod = FALSE){
     exdir <- dirname(file)
     utils::unzip(file, exdir = exdir)
     if(chmod){
-      if(get_os() == "win"){return}
+      if(get_os() == "win"){return()}
       zfiles <- utils::unzip(file, exdir = exdir, list = TRUE)
       Sys.chmod(file.path(exdir, basename(zfiles[["Name"]])), "755")
     }
@@ -48,7 +48,7 @@ unziptar_dlfiles <- function(dlfiles, chmod = FALSE){
     exdir <- dirname(file)
     utils::untar(file, exdir = exdir)
     if(chmod){
-      if(get_os() == "win"){return}
+      if(get_os() == "win"){return()}
       gzfiles <- utils::untar(file, exdir = exdir, list = TRUE)
       Sys.chmod(file.path(exdir, basename(gzfiles)), "755")
     }
