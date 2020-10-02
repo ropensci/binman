@@ -21,4 +21,5 @@ Get application directory
 \dontrun{
 appdir <- app_dir("superduperapp", FALSE)
 }
+
 }

@@ -4,9 +4,15 @@
 \alias{predl_google_storage}
 \title{Pre-Download Google Storage}
 \usage{
-predl_google_storage(url, platform, history, appname, fileregex = "\\\\.zip$",
-  platformregex = platform, versionregex = c(paste0("(.*)/.*", fileregex),
-  "\\\\1"))
+predl_google_storage(
+  url,
+  platform,
+  history,
+  appname,
+  fileregex = "\\\\.zip$",
+  platformregex = platform,
+  versionregex = c(paste0("(.*)/.*", fileregex), "\\\\1")
+)
 }
 \arguments{
 \item{url}{A url giving the JSON bucket listings for a project. For
@@ -40,9 +46,13 @@ Pre-Download Google Storage template function
 \examples{
 \dontrun{
 gsdata <- system.file("testdata", "test_googstor.json",
-                      package="binman")
+  package = "binman"
+)
 platform <- c("linux64", "win32", "mac64")
-gsdllist <- predl_google_storage(url = gsdata, platform, history = 5L,
-                                 appname = "binman_chromedriver")
+gsdllist <- predl_google_storage(
+  url = gsdata, platform, history = 5L,
+  appname = "binman_chromedriver"
+)
 }
+
 }

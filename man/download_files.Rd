@@ -22,17 +22,20 @@ Download binaries from repository
 }
 \examples{
 \dontrun{
-trdata <- system.file("testdata", "test_dlres.Rdata", package="binman")
-tldata <- system.file("testdata", "test_dllist.Rdata", package="binman")
+trdata <- system.file("testdata", "test_dlres.Rdata", package = "binman")
+tldata <- system.file("testdata", "test_dllist.Rdata", package = "binman")
 load(trdata)
 load(tldata)
 dllist <- assign_directory(test_dllist, "myapp")
 testthat::with_mock(
-  `httr::GET` = function(...){
+  `httr::GET` = function(...) {
     test_llres
   },
-  `base::dir.create` = function(...){TRUE},
+  `base::dir.create` = function(...) {
+    TRUE
+  },
   dlfiles <- download_files(dllist)
 )
 }
+
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/postdl_templates.R
 \name{noproc_dlfiles}
 \alias{noproc_dlfiles}
-\title{Dont post process}
+\title{Do not post process}
 \usage{
 noproc_dlfiles(dlfiles)
 }
@@ -15,20 +15,23 @@ Returns a list of character vectors indicating files
     processed
 }
 \description{
-Dont post process dlfiles
+Do not post process dlfiles
 }
 \examples{
 \dontrun{
-ymlfile <- system.file("exdata", "sampleapp4.yml", package="binman")
-trdata <- system.file("testdata", "test_dlres.Rdata", package="binman")
+ymlfile <- system.file("exdata", "sampleapp4.yml", package = "binman")
+trdata <- system.file("testdata", "test_dlres.Rdata", package = "binman")
 load(trdata)
 testthat::with_mock(
-  `httr::GET` = function(...){
+  `httr::GET` = function(...) {
     test_llres
   },
-  `base::dir.create` = function(...){TRUE},
+  `base::dir.create` = function(...) {
+    TRUE
+  },
   procyml <- process_yaml(ymlfile)
 )
 procyml
 }
+
 }

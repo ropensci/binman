@@ -4,8 +4,14 @@
 \alias{predl_github_assets}
 \title{Pre download Github assets}
 \usage{
-predl_github_assets(url, platform, history, appname, platformregex = platform,
-  versionregex = c("", ""))
+predl_github_assets(
+  url,
+  platform,
+  history,
+  appname,
+  platformregex = platform,
+  versionregex = c("", "")
+)
 }
 \arguments{
 \item{url}{A url giving the github asset JSON for a project. As an
@@ -35,9 +41,13 @@ Pre download Github assets template function
 \examples{
 \dontrun{
 gadata <- system.file("testdata", "test_gitassets.json",
-                      package="binman")
+  package = "binman"
+)
 platform <- c("linux64", "win64", "macos")
-gadllist <- predl_github_assets(url = gadata, platform, history = 3L,
-                                appname = "binman_chromedriver")
+gadllist <- predl_github_assets(
+  url = gadata, platform, history = 3L,
+  appname = "binman_chromedriver"
+)
 }
+
 }

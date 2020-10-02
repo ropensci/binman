@@ -4,8 +4,14 @@
 \alias{predl_bitbucket_downloads}
 \title{Pre download bitbucket downloads}
 \usage{
-predl_bitbucket_downloads(url, platform, history, appname,
-  platformregex = platform, versionregex = "\\\\d+(?:\\\\.\\\\d+)+")
+predl_bitbucket_downloads(
+  url,
+  platform,
+  history,
+  appname,
+  platformregex = platform,
+  versionregex = "\\\\d+(?:\\\\.\\\\d+)+"
+)
 }
 \arguments{
 \item{url}{A url giving the bitbucket download JSON for a project. As
@@ -35,12 +41,16 @@ Pre download bitbucket downloads template function
 \examples{
 \dontrun{
 bbdata <- system.file("testdata", "test_bitbucketdl.json",
-                      package="binman")
+  package = "binman"
+)
 platform <- c("linux64", "linux32", "windows", "macosx")
 platformregex <- c("linux-x86_64", "linux-i686", "windows", "macosx")
 bbdllist <-
-  predl_bitbucket_downloads(url = bbdata, platform, history = 3L,
-                            appname = "binman_chromedriver",
-                            platformregex)
+  predl_bitbucket_downloads(
+    url = bbdata, platform, history = 3L,
+    appname = "binman_chromedriver",
+    platformregex
+  )
 }
+
 }

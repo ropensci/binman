@@ -23,8 +23,9 @@ Assign directory to download list
 }
 \examples{
 \dontrun{
-tdata <- system.file("testdata", "test_dllist.Rdata", package="binman")
+tdata <- system.file("testdata", "test_dllist.Rdata", package = "binman")
 load(tdata)
 assign_directory(test_dllist, "myapp")
 }
+
 }

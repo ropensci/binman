@@ -1,3 +1,8 @@
+# binman 0.1.2
+
+* Fixed a bug in an assertion function (thanks @vjcitn #6)
+* Addressed CRAN warnings and notes
+
 # binman 0.1.1
 
 * Fixed tests for CRAN re-submission.
@@ -5,7 +10,7 @@
 # binman 0.1.0
 
 * Add verbose argument to process_yaml.
-* Moved semantic versioning to seperate package
+* Moved semantic versioning to separate package
 
 # binman 0.0.8
 
