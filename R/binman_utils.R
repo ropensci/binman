@@ -20,25 +20,29 @@
 #' res <- list_versions("superduperapp")
 #' unlink(appdir, recursive = TRUE)
 #' }
-
-list_versions <- function(appname, platform = c("ALL")){
+#'
+list_versions <- function(appname, platform = c("ALL")) {
   assert_that(is_string(appname))
   assert_that(is_character(platform))
   appdir <- app_dir(appname)
   platforms <- list.dirs(appdir, full.names = FALSE, recursive = FALSE)
-  platforms <- if(!identical(platform, "ALL")){
-    platind <- platforms %in%platform
-    if(!any(platind)){
-      stop("No platforms found for ", appname, " in ",
-           paste(platform, collapse = ","))
+  platforms <- if (!identical(platform, "ALL")) {
+    platind <- platforms %in% platform
+    if (!any(platind)) {
+      stop(
+        "No platforms found for ", appname, " in ",
+        paste(platform, collapse = ",")
+      )
     }
     platforms[platind]
-  }else{
+  } else {
     platforms
   }
-  res <- lapply(platforms, function(platform){
-    list.dirs(file.path(appdir, platform), full.names = FALSE,
-              recursive = FALSE)
+  res <- lapply(platforms, function(platform) {
+    list.dirs(file.path(appdir, platform),
+      full.names = FALSE,
+      recursive = FALSE
+    )
   })
   setNames(res, platforms)
 }
@@ -66,24 +70,26 @@ list_versions <- function(appname, platform = c("ALL")){
 #' rm_platform(appname, platforms[2:3])
 #' unlink(appdir, recursive = TRUE)
 #' }
-
-rm_platform <- function(appname, platform = c("ALL")){
+#'
+rm_platform <- function(appname, platform = c("ALL")) {
   assert_that(is_string(appname))
   assert_that(is_character(platform))
   appdir <- app_dir(appname)
   platforms <- list.dirs(appdir, full.names = FALSE, recursive = FALSE)
-  platforms <- if(!identical(platform, "ALL")){
-    platind <- platforms %in%platform
-    if(!any(platind)){
-      stop("No platforms found for ", appname, " in ",
-           paste(platform, collapse = ","))
+  platforms <- if (!identical(platform, "ALL")) {
+    platind <- platforms %in% platform
+    if (!any(platind)) {
+      stop(
+        "No platforms found for ", appname, " in ",
+        paste(platform, collapse = ",")
+      )
     }
     platforms[platind]
-  }else{
+  } else {
     platforms
   }
-  res <- vapply(platforms, function(platform){
-    dirpath <-file.path(appdir, platform)
+  res <- vapply(platforms, function(platform) {
+    dirpath <- file.path(appdir, platform)
     message("Removing platform: ", platform)
     unlink(dirpath, recursive = TRUE)
   }, integer(1))
@@ -115,25 +121,27 @@ rm_platform <- function(appname, platform = c("ALL")){
 #' rm_version(appname, platforms[2], versions[1:2])
 #' unlink(appdir, recursive = TRUE)
 #' }
-
-rm_version <- function(appname, platform, version = c("ALL")){
+#'
+rm_version <- function(appname, platform, version = c("ALL")) {
   assert_that(is_string(appname))
   assert_that(is_string(platform))
   assert_that(is_character(version))
   appdir <- app_dir(appname)
   versions <- list_versions(appname, platform)[[platform]]
-  versions <- if(!identical(version, "ALL")){
-    verind <- versions %in%version
-    if(!any(verind)){
-      stop("No versions found for ", appname, " in ",
-           paste(version, collapse = ","))
+  versions <- if (!identical(version, "ALL")) {
+    verind <- versions %in% version
+    if (!any(verind)) {
+      stop(
+        "No versions found for ", appname, " in ",
+        paste(version, collapse = ",")
+      )
     }
     versions[verind]
-  }else{
+  } else {
     versions
   }
-  res <- vapply(versions, function(version){
-    dirpath <-file.path(appdir, platform, version)
+  res <- vapply(versions, function(version) {
+    dirpath <- file.path(appdir, platform, version)
     message("Removing version: ", version, " from platorm: ", platform)
     unlink(dirpath, recursive = TRUE)
   }, integer(1))
@@ -154,11 +162,13 @@ rm_version <- function(appname, platform, version = c("ALL")){
 #' \dontrun{
 #' appdir <- app_dir("superduperapp", FALSE)
 #' }
-
-app_dir <- function(appname, check = TRUE){
+#'
+app_dir <- function(appname, check = TRUE) {
   assert_that(is_string(appname))
   assert_that(is_logical(check))
   appdir <- rappdirs::user_data_dir(paste0("binman_", appname), "binman")
-  if(check){assert_that(app_dir_exists(appdir))}
+  if (check) {
+    assert_that(app_dir_exists(appdir))
+  }
   invisible(appdir)
 }

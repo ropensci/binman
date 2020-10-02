@@ -13,25 +13,26 @@
 #'
 #' @examples
 #' \dontrun{
-#' tdata <- system.file("testdata", "test_dllist.Rdata", package="binman")
+#' tdata <- system.file("testdata", "test_dllist.Rdata", package = "binman")
 #' load(tdata)
 #' assign_directory(test_dllist, "myapp")
 #' }
-
-assign_directory <- function(dllist, appname){
+#'
+assign_directory <- function(dllist, appname) {
   assert_that(is_list_of_df(dllist))
   assert_that(is_string(appname))
-  dl_dirs <- function(platform, version){
+  dl_dirs <- function(platform, version) {
     dlversion <- file.path(platform, version)
     dldir <- rappdirs::user_data_dir(
       paste0("binman_", appname), "binman", dlversion
     )
   }
-  applist <- lapply(names(dllist), function(platform){
+  applist <- lapply(names(dllist), function(platform) {
     platformDF <- dllist[[platform]]
     platformDF[["dir"]] <- Map(dl_dirs,
-                               platform = platform,
-                               version = platformDF[["version"]])
+      platform = platform,
+      version = platformDF[["version"]]
+    )
     platformDF[["exists"]] <-
       file.exists(file.path(platformDF[["dir"]], platformDF[["file"]]))
     platformDF

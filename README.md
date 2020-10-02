@@ -1,37 +1,30 @@
-binman
-==========================
-| CRAN version       | Travis build status   | Appveyor build status   | Coverage |
-| :-------------: |:-------------:|:-------------:|:-------------:|
-| [![CRAN version](http://www.r-pkg.org/badges/version/binman)](https://cran.r-project.org/package=binman)  | [![Build Status](https://travis-ci.org/ropensci/binman.svg?branch=master)](https://travis-ci.org/ropensci/binman) | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/50cv6vybwoxdja1o?svg=true)](https://ci.appveyor.com/project/juyeongkim/binman) | [![codecov](https://codecov.io/gh/ropensci/binman/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/binman)|
+# binman
 
-Tools and functions for managing the download of binary files.
-Binary repositories are defined in YAML format. Defining new 
-pre-download, download and post-download templates allow additonal 
-repositories to be added.
+<!-- badges: start -->
+[![CRAN version](http://www.r-pkg.org/badges/version/binman)](https://cran.r-project.org/package=binman)
+[![R build status](https://github.com/ropensci/binman/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/binman/actions)
+[![codecov](https://codecov.io/gh/ropensci/binman/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/binman)
+<!-- badges: end -->
+
+
+Tools and functions for managing the download of binary files. Binary repositories are defined in YAML format. Defining new pre-download, download and post-download templates allow additional repositories to be added.
 
 ## Installation
 
-You can install binman from github with:
+You can install `binman` from GitHub with:
 
-
-``` r
-# install.packages("devtools")
-devtools::install_github("ropensci/binman")
+```R
+# install.packages("remotes")
+remotes::install_github("ropensci/binman")
 ```
 
 ## Usage Examples
 
-### Github Assets
+### GitHub Assets
 
-The following is an example of using binman to get the github assets from 
-a project. The project is
-https://github.com/lightbody/browsermob-proxy/releases . When a new version
-is released a zipped binary is added as an "asset". 
-A JSON representation of the project releases is available at 
-https://api.github.com/repos/lightbody/browsermob-proxy/releases. `binman`
-needs a YAML file to specify how to parse this projects assets:
+The following is an example of using `binman` to get the GitHub assets from a project. The project is https://github.com/lightbody/browsermob-proxy/releases . When a new version is released a zipped binary is added as an "asset". A JSON representation of the project releases is available at https://api.github.com/repos/lightbody/browsermob-proxy/releases. `binman` needs a YAML file to specify how to parse this projects assets:
 
-```
+```yaml
 name: binman-bmproxy
 predlfunction:
   "binman::predl_github_assets":
@@ -48,21 +41,22 @@ postdlfunction:
 ```
 The file can be accessed at:
 
-```
-ymlfile <- system.file("examples", "yaml", "bmproxy.yml", package="binman")
+```R
+ymlfile <- system.file("examples", "yaml", "bmproxy.yml", package = "binman")
 
 ```
 
 Downloading the three most recent releases can the be done using:
 
-```
+```R
 process_yaml(ymlfile)
 ```
 
 with resulting directory structure (We omit files for brevity):
 
 #### LINUX
-```
+
+```sh
 john@ubuntu:~$ tree -d /home/john/.local/share/binman_bmproxy
 /home/john/.local/share/binman_bmproxy
 └── generic
@@ -90,7 +84,7 @@ john@ubuntu:~$ tree -d /home/john/.local/share/binman_bmproxy
 
 #### WINDOWS
 
-```
+```cmd
 C:\Users\john>tree C:\Users\john\AppData\Local\binman\binman_bmproxy
 Folder PATH listing
 Volume serial number is 7CC8-BD03
@@ -118,7 +112,7 @@ C:\USERS\JOHN\APPDATA\LOCAL\BINMAN\BINMAN_BMPROXY
 
 #### MACOSX
 
-```
+```sh
 DE529:~ admin$ tree -d /Users/admin/Library/Application\ Support/binman_bmproxy
 /Users/admin/Library/Application\ Support/binman_bmproxy
 └── generic

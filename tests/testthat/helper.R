@@ -1,5 +1,6 @@
-test_sem_ver <- function(){
-  c("1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay",
+test_sem_ver <- function() {
+  c(
+    "1.0.0-alpha-a.b-c-somethinglong+build.1-aef.1-its-okay",
     "1.0.0+0.build.1-rc.10000aaa-kk-0.1",
     "1.0.0-rc.1+build.1",
     "2.0.0-rc.1+build.123",
@@ -14,5 +15,6 @@ test_sem_ver <- function(){
     "1.1.7",
     "2.0.0+build.1848",
     "2.0.1-alpha.1227",
-    "1.2.3----RC-SNAPSHOT.12.9.1--.12+788")
+    "1.2.3----RC-SNAPSHOT.12.9.1--.12+788"
+  )
 }

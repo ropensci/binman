@@ -27,8 +27,10 @@ test_that("canListPlatformBinmanApp", {
 })
 
 test_that("canCheckBinmanAppDir", {
-  expect_error(appdir <- app_dir("superduperapp"),
-               "superduperapp app directory not found")
+  expect_error(
+    appdir <- app_dir("superduperapp"),
+    "superduperapp app directory not found"
+  )
 })
 
 test_that("canRemoveBinmanAppVersion", {
@@ -76,10 +78,16 @@ test_that("canThrowUtilErrors", {
   mkdirs <- file.path(appdir, outer(platforms, versions, file.path))
   chk <- vapply(mkdirs, dir.create, logical(1), recursive = TRUE)
   expect_true(all(chk))
-  expect_error(list_versions("superduperapp", "nothere"),
-               "No platforms found")
-  expect_error(rm_platform("superduperapp", "nothere"),
-               "No platforms found")
-  expect_error(rm_version("superduperapp", "A", "nothere"),
-               "No versions found")
+  expect_error(
+    list_versions("superduperapp", "nothere"),
+    "No platforms found"
+  )
+  expect_error(
+    rm_platform("superduperapp", "nothere"),
+    "No platforms found"
+  )
+  expect_error(
+    rm_version("superduperapp", "A", "nothere"),
+    "No versions found"
+  )
 })

@@ -24,17 +24,20 @@
 #' @examples
 #' \dontrun{
 #' gsdata <- system.file("testdata", "test_googstor.json",
-#'                       package="binman")
+#'   package = "binman"
+#' )
 #' platform <- c("linux64", "win32", "mac64")
-#' gsdllist <- predl_google_storage(url = gsdata, platform, history = 5L,
-#'                                  appname = "binman_chromedriver")
+#' gsdllist <- predl_google_storage(
+#'   url = gsdata, platform, history = 5L,
+#'   appname = "binman_chromedriver"
+#' )
 #' }
-
+#'
 predl_google_storage <-
   function(url, platform, history, appname,
            fileregex = "\\.zip$",
            platformregex = platform,
-           versionregex = c(paste0("(.*)/.*", fileregex), "\\1")){
+           versionregex = c(paste0("(.*)/.*", fileregex), "\\1")) {
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
@@ -43,17 +46,19 @@ predl_google_storage <-
     assert_that(is_character(platformregex))
     assert_that(is_character(versionregex))
     ver_data <- jsonlite::fromJSON(url)[["items"]]
-    ver_data <- ver_data[ order(as.numeric(ver_data[["generation"]])), ]
+    ver_data <- ver_data[order(as.numeric(ver_data[["generation"]])), ]
     is_file <- grepl(fileregex, basename(ver_data[["name"]]))
-    is_platform <- lapply(platformregex, function(x){
+    is_platform <- lapply(platformregex, function(x) {
       grepl(x, basename(ver_data[["name"]]))
     })
-    app_links <- lapply(is_platform, function(x){
+    app_links <- lapply(is_platform, function(x) {
       df <- utils::tail(ver_data[is_file & x, ], history)
-      df[["version"]] <- gsub(versionregex[1], versionregex[2],
-                              df[["name"]])
+      df[["version"]] <- gsub(
+        versionregex[1], versionregex[2],
+        df[["name"]]
+      )
       df[["url"]] <- df[["mediaLink"]]
-      df[["file"]] <- vapply(df[["url"]], function(x){
+      df[["file"]] <- vapply(df[["url"]], function(x) {
         basename(xml2::url_unescape(httr::parse_url(x)[["path"]]))
       }, character(1))
       df[, c("version", "url", "file")]
@@ -84,15 +89,18 @@ predl_google_storage <-
 #' @examples
 #' \dontrun{
 #' gadata <- system.file("testdata", "test_gitassets.json",
-#'                       package="binman")
+#'   package = "binman"
+#' )
 #' platform <- c("linux64", "win64", "macos")
-#' gadllist <- predl_github_assets(url = gadata, platform, history = 3L,
-#'                                 appname = "binman_chromedriver")
+#' gadllist <- predl_github_assets(
+#'   url = gadata, platform, history = 3L,
+#'   appname = "binman_chromedriver"
+#' )
 #' }
-
+#'
 predl_github_assets <-
   function(url, platform, history, appname, platformregex = platform,
-           versionregex = c("", "")){
+           versionregex = c("", "")) {
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
@@ -101,12 +109,14 @@ predl_github_assets <-
     ghdata <- jsonlite::fromJSON(url)
     version <- ghdata[["tag_name"]]
     version <- gsub(versionregex[1], versionregex[2], version)
-    get_args <- function(version, assets){
+    get_args <- function(version, assets) {
       file <- assets[["name"]]
       url <- assets[["browser_download_url"]]
       plat <- match_platform(file, platform, platformregex)
-      res <- data.frame(file = file, url = url, version = version,
-                        platform = plat, stringsAsFactors = FALSE)
+      res <- data.frame(
+        file = file, url = url, version = version,
+        platform = plat, stringsAsFactors = FALSE
+      )
       stats::na.omit(res)
     }
     res <- Map(get_args, version = version, assets = ghdata[["assets"]])
@@ -139,19 +149,22 @@ predl_github_assets <-
 #' @examples
 #' \dontrun{
 #' bbdata <- system.file("testdata", "test_bitbucketdl.json",
-#'                       package="binman")
+#'   package = "binman"
+#' )
 #' platform <- c("linux64", "linux32", "windows", "macosx")
 #' platformregex <- c("linux-x86_64", "linux-i686", "windows", "macosx")
 #' bbdllist <-
-#'   predl_bitbucket_downloads(url = bbdata, platform, history = 3L,
-#'                             appname = "binman_chromedriver",
-#'                             platformregex)
+#'   predl_bitbucket_downloads(
+#'     url = bbdata, platform, history = 3L,
+#'     appname = "binman_chromedriver",
+#'     platformregex
+#'   )
 #' }
-
+#'
 predl_bitbucket_downloads <-
   function(url, platform, history, appname,
            platformregex = platform,
-           versionregex = "\\d+(?:\\.\\d+)+"){
+           versionregex = "\\d+(?:\\.\\d+)+") {
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
@@ -164,8 +177,10 @@ predl_bitbucket_downloads <-
     vermatch <- regexpr(versionregex, file)
     version <- regmatches(file, vermatch)
     plat <- match_platform(file, platform, platformregex)
-    res <- data.frame(file = file, url = url, version = version,
-                      platform = plat, stringsAsFactors = FALSE)
+    res <- data.frame(
+      file = file, url = url, version = version,
+      platform = plat, stringsAsFactors = FALSE
+    )
     res <- stats::na.omit(res)
     res <- split(res[, c("version", "url", "file")], f = res[["platform"]])
     res <- lapply(res, utils::head, history)
