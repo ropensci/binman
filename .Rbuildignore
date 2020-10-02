@@ -4,3 +4,5 @@
 ^appveyor\.yml$
 docs
 ^\.github$
+^CRAN-RELEASE$
+^cran-comments\.md$
