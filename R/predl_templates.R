@@ -77,6 +77,7 @@ predl_google_storage <-
 #' @param platform A character vector of platform names
 #' @param history The maximum number of files to get for a platform
 #' @param appname Name of the app
+#' @param fileregex A filter for files
 #' @param platformregex A filter for platforms. Defaults to the platform
 #' @param versionregex A regex for retrieving the version.
 #'
@@ -99,12 +100,15 @@ predl_google_storage <-
 #' }
 #'
 predl_github_assets <-
-  function(url, platform, history, appname, platformregex = platform,
+  function(url, platform, history, appname,
+           fileregex = "",
+           platformregex = platform,
            versionregex = c("", "")) {
     assert_that(is_URL_file(url))
     assert_that(is_character(platform))
     assert_that(is_integer(history))
     assert_that(is_string(appname))
+    assert_that(is_string(fileregex))
     assert_that(is_character(platformregex))
     ghdata <- jsonlite::fromJSON(url)
     version <- ghdata[["tag_name"]]
@@ -122,6 +126,7 @@ predl_github_assets <-
     res <- Map(get_args, version = version, assets = ghdata[["assets"]])
     res <- do.call(rbind.data.frame, c(res, make.row.names = FALSE))
     res <- split(res[, c("version", "url", "file")], f = res[["platform"]])
+    res <- lapply(res, function(x) x[grepl("\\.(gz|zip)$", x$file), ])
     res <- lapply(res, utils::head, history)
     assign_directory(res, appname)
   }

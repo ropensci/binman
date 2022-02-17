@@ -9,6 +9,7 @@ predl_github_assets(
   platform,
   history,
   appname,
+  fileregex = "",
   platformregex = platform,
   versionregex = c("", "")
 )
@@ -24,6 +25,8 @@ https://api.github.com/repos/mozilla/geckodriver/releases}
 \item{history}{The maximum number of files to get for a platform}
 
 \item{appname}{Name of the app}
+
+\item{fileregex}{A filter for files}
 
 \item{platformregex}{A filter for platforms. Defaults to the platform}
 
