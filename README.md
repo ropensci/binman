@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![CRAN version](http://www.r-pkg.org/badges/version/binman)](https://cran.r-project.org/package=binman)
-[![R build status](https://github.com/ropensci/binman/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/binman/actions)
+[![R-CMD-check](https://github.com/ropensci/binman/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/binman/actions)
 [![codecov](https://codecov.io/gh/ropensci/binman/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/binman)
 <!-- badges: end -->
 
