@@ -1,3 +1,7 @@
+# binman 0.1.3
+
+* Add file regex filter for downloading GitHub assets
+
 # binman 0.1.2
 
 * Fixed a bug in an assertion function (thanks @vjcitn #6)

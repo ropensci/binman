@@ -1,6 +1,6 @@
 Package: binman
 Title: A Binary Download Manager
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: c(
     person("John", "Harrison", , "johndharrison0@gmail.com",
     role = "aut", comment = "original author"),
@@ -14,7 +14,6 @@ Depends:
     R (>= 3.3)
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Suggests:
     testthat,
     covr,
@@ -32,5 +31,5 @@ Imports:
     semver
 URL: https://docs.ropensci.org/binman/, https://github.com/ropensci/binman
 BugReports: https://github.com/ropensci/binman/issues
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr
