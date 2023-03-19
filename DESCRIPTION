@@ -2,34 +2,38 @@ Package: binman
 Title: A Binary Download Manager
 Version: 0.1.3
 Authors@R: c(
-    person("John", "Harrison", , "johndharrison0@gmail.com",
-    role = "aut", comment = "original author"),
-    person("Ju Yeong", "Kim", , "jkim2345@fredhutch.org",
-    role = "cre", comment = "rOpenSci maintainer"))
-Description: Tools and functions for managing the download of binary files.
-    Binary repositories are defined in 'YAML' format. Defining new 
-    pre-download, download and post-download templates allow additional 
+    person("John", "Harrison", , "johndharrison0@gmail.com", role = "aut",
+           comment = "original author"),
+    person("Ju Yeong", "Kim", , "jkim2345@fredhutch.org", role = "aut",
+           comment = "rOpenSci maintainer"),
+    person("Jonathan", "Völkle", , "jonathan.voelkle@web.de", role = "cre")
+  )
+Description: Tools and functions for managing the download of binary
+    files.  Binary repositories are defined in 'YAML' format. Defining new
+    pre-download, download and post-download templates allow additional
     repositories to be added.
-Depends:
-    R (>= 3.3)
 License: MIT + file LICENSE
-Encoding: UTF-8
-Suggests:
-    testthat,
-    covr,
-    knitr,
-    rmarkdown
-Imports:
-    rappdirs,
-    yaml,
-    httr,
-    jsonlite,
-    xml2,
-    utils,
-    stats,
-    assertthat,
-    semver
 URL: https://docs.ropensci.org/binman/, https://github.com/ropensci/binman
 BugReports: https://github.com/ropensci/binman/issues
-RoxygenNote: 7.2.1
-VignetteBuilder: knitr
+Depends:
+    R (>= 3.3)
+Imports:
+    assertthat,
+    httr,
+    jsonlite,
+    rappdirs,
+    semver,
+    stats,
+    utils,
+    xml2,
+    yaml
+Suggests:
+    covr,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+RoxygenNote: 7.2.3

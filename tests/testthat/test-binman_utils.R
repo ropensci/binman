@@ -1,5 +1,3 @@
-context("binman_utils")
-
 test_that("canListBinmanApp", {
   appdir <- app_dir("superduperapp", FALSE)
   on.exit(unlink(appdir, recursive = TRUE))

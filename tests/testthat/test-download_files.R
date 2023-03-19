@@ -1,5 +1,3 @@
-context("download_files")
-
 test_that("canDownloadFiles", {
   trdata <- system.file("testdata", "test_dlres.Rdata", package = "binman")
   tldata <- system.file("testdata", "test_dllist.Rdata", package = "binman")
