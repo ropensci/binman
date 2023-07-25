@@ -1,5 +1,3 @@
-context("postdl_templates")
-
 test_that("canNotPostProcess", {
   dlfiles <- data.frame(
     platform = LETTERS[1:3],

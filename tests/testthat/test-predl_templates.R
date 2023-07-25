@@ -1,5 +1,3 @@
-context("predl_templates")
-
 test_that("canPreDowloadGoogleStorage", {
   gsdata <- system.file("testdata", "test_googstor.json",
     package = "binman"

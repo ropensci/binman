@@ -1,5 +1,3 @@
-context("process_yaml")
-
 test_that("canProcessYaml", {
   ymlfile <- system.file("exdata", "sampleapp.yml", package = "binman")
   trdata <- system.file("testdata", "test_dlres.Rdata", package = "binman")
